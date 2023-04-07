@@ -2,7 +2,26 @@ name: Test
 on: [push, pull_request]
 
 jobs:
-  codecov:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+      - name: GitHub Action for SwiftLint with --strict
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+      - name: GitHub Action for SwiftLint (Only files changed in the PR)
+        uses: norio-nomura/action-swiftlint@3.2.1
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
+      - name: GitHub Action for SwiftLint (Different working directory)
+        uses: norio-nomura/action-swiftlint@3.2.1
+        env:
+          WORKING_DIRECTORY: Source
+
+  Codecov:
     container:
       image: swift:5.8
     runs-on: ubuntu-latest
@@ -22,45 +41,24 @@ jobs:
       uses: codecov/codecov-action@v3
 
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      # Ruby
-      - name: Set up Ruby latest
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 'head'
-      - name: Install dependencies
-        run: |
-            bundle install \
-                --without=documentation \
-                --jobs 4 \
-                --retry 3
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: get_branch
-        
-      # Swift
-      - name: Run tests and collect coverage
-        run: |
-            swift test \
-                --enable-code-coverage \
-                | xcpretty
-
-      # Cargo
-      - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@cargo-llvm-cov
-      - name: Generate code coverage
-        run: |
-            cargo llvm-cov \
-                --all-features \
-                --workspace \
-                --lcov \
-                --output-path lcov.info
+    - name: Danger
+      run: echo 'Danger'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#
+#      # Ruby
+#      - name: Set up Ruby latest
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: 'head'
+#      - name: Install dependencies
+#        run: |
+#            bundle install \
+#                --without=documentation \
+#                --jobs 4 \
+#                --retry 3
 
       # Slather
       - run: bundle exec slather
@@ -68,10 +66,6 @@ jobs:
           GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
           CI_PULL_REQUEST: ${{ github.event.number }}
           COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      # Codecov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
 
       # - name: Danger
       #   run: bundle exec danger
