@@ -30,7 +30,7 @@ jobs:
 #                > info.lcov
       
       # Slather
-      - name: Rund Slather
+#      - name: Rund Slather
 #        run: slather
       
       # Codecov

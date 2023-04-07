@@ -1,4 +1,7 @@
 coverage_service: cobertura_xml
 xcodeproj: App/DeepLinking.xcodeproj
 scheme: DeepLinking
-output_directory: ./
+source_directory: ./Sources
+output_directory: .build
+ignore:
+  - App/*
