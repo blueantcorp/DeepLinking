@@ -13,7 +13,16 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Run tests and collect coverage
-        run: swift test --enable-code-coverage --show-codecov-path
+        run: |
+            swift test \
+                --enable-code-coverage \
+                | xcpretty
+                
+            llvm-cov export -format="lcov" \
+                .build/debug/DeepLinking/PackageTests.xctest \
+                -instr-profile .build/debug/codecov/default.profdata \
+                > info.lcov
+                
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
