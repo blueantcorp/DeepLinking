@@ -19,7 +19,7 @@
 		6008994029E09BBC0052471A /* test.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6008993629E09BBC0052471A /* test.yml */; };
 		6008994229E0B2020052471A /* .slather.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6008994129E0B2020052471A /* .slather.yml */; };
 		6008994429E0B9A60052471A /* project.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6008994329E0B9A60052471A /* project.yml */; };
-		6008994629E0BFE90052471A /* codecov.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6008994529E0BFE90052471A /* codecov.yml */; };
+		6008994629E0BFE90052471A /* .codecov.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6008994529E0BFE90052471A /* .codecov.yml */; };
 		60408AEF29E01DC300D3A03A /* DeepLinkingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */; };
 		60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60408AF229E01DC400D3A03A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,7 @@
 		6008993629E09BBC0052471A /* test.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = test.yml; path = ../.github/workflows/test.yml; sourceTree = "<group>"; };
 		6008994129E0B2020052471A /* .slather.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .slather.yml; path = ../.slather.yml; sourceTree = "<group>"; };
 		6008994329E0B9A60052471A /* project.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = project.yml; path = ../project.yml; sourceTree = "<group>"; };
-		6008994529E0BFE90052471A /* codecov.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = codecov.yml; path = ../codecov.yml; sourceTree = "<group>"; };
+		6008994529E0BFE90052471A /* .codecov.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .codecov.yml; path = ../.codecov.yml; sourceTree = "<group>"; };
 		60408AEB29E01DC300D3A03A /* DeepLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkingApp.swift; sourceTree = "<group>"; };
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 				6008992E29E09BBC0052471A /* .swiftlint.yml */,
 				6008993029E09BBC0052471A /* .xctool-args */,
 				6008994129E0B2020052471A /* .slather.yml */,
-				6008994529E0BFE90052471A /* codecov.yml */,
+				6008994529E0BFE90052471A /* .codecov.yml */,
 				6008994329E0B9A60052471A /* project.yml */,
 				6008993429E09BBC0052471A /* swiftlint.yml */,
 				6008993629E09BBC0052471A /* test.yml */,
@@ -172,7 +172,7 @@
 				6008993829E09BBC0052471A /* .swiftlint.yml in Resources */,
 				6008994229E0B2020052471A /* .slather.yml in Resources */,
 				6008993729E09BBC0052471A /* .swift-version in Resources */,
-				6008994629E0BFE90052471A /* codecov.yml in Resources */,
+				6008994629E0BFE90052471A /* .codecov.yml in Resources */,
 				60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
