@@ -22,11 +22,16 @@ jobs:
             swift test \
                 --enable-code-coverage \
                 | xcpretty
-                
-            llvm-cov export -format="lcov" \
-                .build/debug/DeepLinking/PackageTests.xctest \
-                -instr-profile .build/debug/codecov/default.profdata \
-                > info.lcov
+            
+            bundle exec slather
+#            llvm-cov export -format="lcov" \
+#                .build/debug/DeepLinking/PackageTests.xctest \
+#                -instr-profile .build/debug/codecov/default.profdata \
+#                > info.lcov
+      
+      # Slather
+      - name: Rund Slather
+#        run: slather
       
       # Codecov
       - name: Upload coverage to Codecov
