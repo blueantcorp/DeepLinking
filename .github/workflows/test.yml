@@ -1,17 +1,22 @@
 name: Test
 on: [push, pull_request]
+
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      # Ruby
       - name: Set up Ruby latest
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 'head'
       - name: Install dependencies
         run: bundle install
+        
+      # Swift
       - name: Run tests and collect coverage
         run: |
             swift test \
@@ -22,7 +27,8 @@ jobs:
                 .build/debug/DeepLinking/PackageTests.xctest \
                 -instr-profile .build/debug/codecov/default.profdata \
                 > info.lcov
-                
+      
+      # Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
