@@ -1,3 +1,10 @@
+name: test
+
+on:
+  push:
+    branches:
+      - "*"
+
 jobs:
   codecov:
     container:
