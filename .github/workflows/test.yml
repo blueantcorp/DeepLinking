@@ -22,8 +22,6 @@ jobs:
             swift test \
                 --enable-code-coverage \
                 | xcpretty
-            
-            bundle exec slather
 
       # Cargo
       - name: Install cargo-llvm-cov
@@ -34,10 +32,10 @@ jobs:
                 --workspace \
                 --lcov \
                 --output-path lcov.info
-      
+
       # Slather
-#      - name: Rund Slather
-#        run: slather
+      - name: Run Slather
+        run: bundle exec slather
       
       # Codecov
       - name: Upload coverage to Codecov
