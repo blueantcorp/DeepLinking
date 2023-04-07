@@ -7,18 +7,18 @@ on:
     branches:
       - "*"
 jobs:
-  codecov:
+  Test:
     container:
       image: swift:5.8
     runs-on: macos-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v3
+      uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
 
