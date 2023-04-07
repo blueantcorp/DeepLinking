@@ -1,0 +1,5 @@
+[
+	"-workspace", "HPay.xcworkspace",
+	"-scheme", "HPayDev2",
+	"-sdk", "iphonesimulator7.0",
+]
