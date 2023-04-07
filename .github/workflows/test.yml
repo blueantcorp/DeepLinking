@@ -14,7 +14,16 @@ jobs:
         with:
           ruby-version: 'head'
       - name: Install dependencies
-        run: bundle install
+        run: |
+            bundle install \
+                --without=documentation \
+                --jobs 4 \
+                --retry 3
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: get_branch
         
       # Swift
       - name: Run tests and collect coverage
@@ -35,8 +44,11 @@ jobs:
                 --output-path lcov.info
 
       # Slather
-      - name: Run Slather
-        run: bundle exec slather
+      - run: bundle exec slather
+        env:
+          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
+          CI_PULL_REQUEST: ${{ github.event.number }}
+          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # Codecov
       - name: Upload coverage to Codecov
