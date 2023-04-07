@@ -33,31 +33,19 @@ jobs:
     - name: Collect code coverage
       uses: codecov/codecov-action@v3
 
-name: test
-
-jobs:
-  tests:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Run tests
-        run: make test
-
       # - name: Danger
       #   run: bundle exec danger
       #   env:
       #     DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: ResultBundle
-          path: ./coverage/*.xcresult
-          if-no-files-found: warn
-          retention-days: 5
-
-      - name: Clean up
-        if: ${{ always() }}
-        run: make cleanup
+#      - uses: actions/upload-artifact@v2
+#        if: ${{ always() }}
+#        with:
+#          name: ResultBundle
+#          path: ./coverage/*.xcresult
+#          if-no-files-found: warn
+#          retention-days: 5
+#
+#      - name: Clean up
+#        if: ${{ always() }}
+#        run: make cleanup
