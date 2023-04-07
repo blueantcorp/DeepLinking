@@ -1,37 +1,21 @@
 name: Test
-on:
-  pull_request:
-    branches:
-      - "*"
-  push:
-    branches:
-      - "*"
+on: [push, pull_request]
 jobs:
-  Test:
-    container:
-      image: swift:5.8
-    runs-on: macos-latest
-    
+  run:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-
-    - name: Install bundler
-      run: |
-        gem install bundler
-        bundler install
-
-    - name: Run tests
-      run: make test
-    
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Ruby latest
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 'head'
+      - name: Install dependencies
+        run: bundle install
+      - name: Run tests and collect coverage
+        run: swift test --enable-code-coverage --show-codecov-path
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
 
       # - name: Danger
       #   run: bundle exec danger
