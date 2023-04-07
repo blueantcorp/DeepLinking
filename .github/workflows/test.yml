@@ -1,4 +1,4 @@
-name: test
+name: Test
 on:
   pull_request:
     branches:
@@ -7,7 +7,7 @@ on:
     branches:
       - "*"
 jobs:
-  codecov:
+  Test:
     container:
       image: swift:5.8
     runs-on: macos-latest
@@ -18,7 +18,7 @@ jobs:
         fetch-depth: 0
 
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v3
+      uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
 
