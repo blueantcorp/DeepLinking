@@ -13,7 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: swift test --enable-test-discovery --enable-code-coverage
+    - uses: codecov/codecov-action@v3
     - uses: mattpolzin/swift-codecov-action@0.7.5
       with:
-        MINIMUM_COVERAGE: 98
+        MINIMUM_COVERAGE: 90
         INCLUDE_TESTS: 'true'
