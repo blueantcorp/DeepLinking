@@ -21,11 +21,11 @@ jobs:
 #      uses: ruby/setup-ruby@v1
 #      with:
 #        bundler-cache: true
-
-    - name: Install bundler
-      run: |
-        gem install bundler
-        bundler install
+#
+#    - name: Install bundler
+#      run: |
+#        gem install bundler
+#        bundler install
 
     - name: Run tests
       run: make test

@@ -6,7 +6,7 @@ test:
         -destination platform="iOS" \
         -enableCodeCoverage YES \
         -derivedDataPath .build/derivedData \
-        test | xcpretty
+        test 
 
 #codecov:
 	@bash <(curl -s https://codecov.io/bash) \
