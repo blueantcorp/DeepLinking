@@ -30,7 +30,7 @@ jobs:
 
   slather:
     if: ${{ false }}
-    needs: [analyze,test]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
