@@ -1,5 +1,12 @@
 ignore:
   - "App/*"
 
+coverage:
+  status:
+    project:
+      default:
+        target: 100%
+        threshold: 1%
+
 comment:
   layout: "reach,diff,flags,tree,betaprofiling"

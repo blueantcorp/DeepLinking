@@ -19,9 +19,8 @@
 		6008993129E09BBC0052471A /* .ruby-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".ruby-version"; path = "../.ruby-version"; sourceTree = "<group>"; };
 		6008993229E09BBC0052471A /* .editorconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .editorconfig; path = ../.editorconfig; sourceTree = "<group>"; };
 		6008993329E09BBC0052471A /* .overcommit.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .overcommit.yml; path = ../.overcommit.yml; sourceTree = "<group>"; };
-		6008993429E09BBC0052471A /* swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftlint.yml; path = ../.github/workflows/swiftlint.yml; sourceTree = "<group>"; };
 		6008993529E09BBC0052471A /* .clang-format */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".clang-format"; path = "../.clang-format"; sourceTree = "<group>"; };
-		6008993629E09BBC0052471A /* test.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = test.yml; path = ../.github/workflows/test.yml; sourceTree = "<group>"; };
+		6008993629E09BBC0052471A /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = ci.yml; path = ../.github/workflows/ci.yml; sourceTree = "<group>"; };
 		6008994129E0B2020052471A /* .slather.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .slather.yml; path = ../.slather.yml; sourceTree = "<group>"; };
 		6008994529E0BFE90052471A /* .codecov.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .codecov.yml; path = ../.codecov.yml; sourceTree = "<group>"; };
 		6008994729E0F83F0052471A /* .xcode-version */ = {isa = PBXFileReference; lastKnownFileType = text; name = ".xcode-version"; path = "../.xcode-version"; sourceTree = "<group>"; };
@@ -58,8 +57,7 @@
 				6008994129E0B2020052471A /* .slather.yml */,
 				6095E50929E1030700323E7B /* .xcodegen.yml */,
 				6008994529E0BFE90052471A /* .codecov.yml */,
-				6008993429E09BBC0052471A /* swiftlint.yml */,
-				6008993629E09BBC0052471A /* test.yml */,
+				6008993629E09BBC0052471A /* ci.yml */,
 			);
 			name = Configs;
 			sourceTree = "<group>";
