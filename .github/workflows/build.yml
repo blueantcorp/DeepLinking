@@ -4,8 +4,9 @@ on: [push, pull_request]
 jobs:
   build:
     name: Build Package
-    runs-on: ./.github/actions/bootstrap
+    runs-on: self-hosted
     steps:
+      - uses: ./.github/actions/bootstrap
       - name: Build Package
         run: swift build -v
 
