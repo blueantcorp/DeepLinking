@@ -16,9 +16,11 @@
 		60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkingApp.swift; sourceTree = "<group>"; };
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
-		60DE01C429E125170075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = build.yml; path = ../.github/workflows/build.yml; sourceTree = "<group>"; };
-		60DE01C529E125170075AA5D /* test.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = test.yml; path = ../.github/workflows/test.yml; sourceTree = "<group>"; };
-		60DE01C629E127DE0075AA5D /* lint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = lint.yml; path = ../.github/workflows/lint.yml; sourceTree = "<group>"; };
+		60DE01CE29E139420075AA5D /* lint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = lint.yml; sourceTree = "<group>"; };
+		60DE01CF29E139420075AA5D /* test.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = test.yml; sourceTree = "<group>"; };
+		60DE01D029E139420075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = build.yml; sourceTree = "<group>"; };
+		60DE01D329E139420075AA5D /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		60DE01D429E139420075AA5D /* dependabot.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = dependabot.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,9 +37,7 @@
 		6008992C29E09B810052471A /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				60DE01C429E125170075AA5D /* build.yml */,
-				60DE01C629E127DE0075AA5D /* lint.yml */,
-				60DE01C529E125170075AA5D /* test.yml */,
+				60DE01CC29E139420075AA5D /* .github */,
 			);
 			name = Configs;
 			sourceTree = "<group>";
@@ -67,6 +67,43 @@
 				60408AF229E01DC400D3A03A /* Assets.xcassets */,
 			);
 			name = App;
+			sourceTree = "<group>";
+		};
+		60DE01CC29E139420075AA5D /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				60DE01CD29E139420075AA5D /* workflows */,
+				60DE01D129E139420075AA5D /* actions */,
+				60DE01D429E139420075AA5D /* dependabot.yml */,
+			);
+			name = .github;
+			path = ../.github;
+			sourceTree = "<group>";
+		};
+		60DE01CD29E139420075AA5D /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				60DE01CE29E139420075AA5D /* lint.yml */,
+				60DE01CF29E139420075AA5D /* test.yml */,
+				60DE01D029E139420075AA5D /* build.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
+		60DE01D129E139420075AA5D /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				60DE01D229E139420075AA5D /* bootstrap */,
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
+		60DE01D229E139420075AA5D /* bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				60DE01D329E139420075AA5D /* action.yml */,
+			);
+			path = bootstrap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

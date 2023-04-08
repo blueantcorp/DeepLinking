@@ -1,0 +1,13 @@
+name: 'Bootstrap'
+description: 'Bootstrap description'
+
+inputs:
+  app-name:
+     required: false
+     description: 'The app name used by the React app'
+     default: 'Demo'
+
+runs:
+  using: 'ubuntu-latest'
+  steps:
+    - uses: 'actions/checkout@v3
