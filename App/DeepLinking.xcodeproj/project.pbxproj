@@ -17,7 +17,7 @@
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
 		60DE01C429E125170075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = build.yml; path = ../.github/workflows/build.yml; sourceTree = "<group>"; };
-		60DE01C529E125170075AA5D /* ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = ci.yml; path = ../.github/workflows/ci.yml; sourceTree = "<group>"; };
+		60DE01C529E125170075AA5D /* test.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = test.yml; path = ../.github/workflows/test.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +35,7 @@
 			isa = PBXGroup;
 			children = (
 				60DE01C429E125170075AA5D /* build.yml */,
-				60DE01C529E125170075AA5D /* ci.yml */,
+				60DE01C529E125170075AA5D /* test.yml */,
 			);
 			name = Configs;
 			sourceTree = "<group>";
