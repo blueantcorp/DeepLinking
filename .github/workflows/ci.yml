@@ -40,9 +40,9 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
 
-  Danger:
-    - name: Danger
-      run: echo 'Danger'
+#  Danger:
+#    - name: Danger
+#      run: echo 'Danger'
 #    runs-on: ubuntu-latest
 #    steps:
 #      - name: Checkout
