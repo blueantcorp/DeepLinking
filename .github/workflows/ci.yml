@@ -30,7 +30,7 @@ jobs:
       
   codecov:
     needs: [test]
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
