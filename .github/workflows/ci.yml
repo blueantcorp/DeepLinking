@@ -45,7 +45,7 @@ jobs:
 
   slather:
     if: ${{ false }}
-    needs: [build, test]
+    needs: [build,test, test]
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +59,7 @@ jobs:
       - run: bundle exec slather
       
   codecov:
-    needs: [test]
+    needs: [slather]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

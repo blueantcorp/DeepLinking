@@ -41,6 +41,7 @@ public struct DeepLinkValues {
 /// Describes how to extract a deep link's values from a URL.
 /// A template is considered to match a URL if all of its required values are found in the URL.
 public struct DeepLinkTemplate {
+
     // MARK: - Public API
     public init() {
         self.init(pathParts: [], parameters: [])
@@ -135,18 +136,26 @@ public struct DeepLinkRecognizer {
 
     // MARK: - URL value extraction
     private static func extractValues(in template: DeepLinkTemplate, from url: URL) -> DeepLinkValues? {
+        
         guard let pathValues = extractPathValues(in: template, from: url) else { return nil }
+        
         guard let queryValues = extractQueryValues(in: template, from: url) else { return nil }
+        
         return DeepLinkValues(path: pathValues, query: queryValues, fragment: url.fragment)
     }
 
     private static func extractPathValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
+        
         let allComponents = url.host.map { [$0] + url.pathComponents } ?? url.pathComponents
+        
         let components = allComponents
             .filter { $0 != "/" }
             .map { $0.removingPercentEncoding ?? "" }
+        
         guard components.count == template.pathParts.count else { return nil }
+        
         var values = [String: Any]()
+        
         for (pathPart, component) in zip(template.pathParts, components) {
             switch pathPart {
             case let .int(name):
@@ -172,11 +181,13 @@ public struct DeepLinkRecognizer {
     }
 
     private static func extractQueryValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
+
         if template.parameters.isEmpty {
             return url.query == nil ? [:] : nil
         }
 
         let requiredParameters = template.parameters.filter { $0.isRequired }
+
         let optionalParameters = template.parameters.subtracting(requiredParameters)
 
         guard let query = url.query else {
@@ -201,6 +212,7 @@ public struct DeepLinkRecognizer {
     }
 
     private typealias QueryMap = [String: String]
+
     private static func createMap(of query: String) -> QueryMap {
         // Transforms "a=b&c=d" to [(a, b), (c, d)]
         let keyValuePairs = query
@@ -248,6 +260,7 @@ extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
     }
 
     fileprivate enum ParameterType { case string, int, double, bool }
+
     fileprivate var type: ParameterType {
         switch self {
         case .requiredInt, .optionalInt:    return .int
