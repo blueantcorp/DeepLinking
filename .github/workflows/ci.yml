@@ -9,6 +9,7 @@ jobs:
     
   build:
     needs: [bootstrap]
+    runs-on: self-hosted
     steps:
 #      - uses: ./.github/actions/bootstrap
       - name: Build Package
@@ -16,6 +17,7 @@ jobs:
         
   test:
     needs: [bootstrap]
+    runs-on: self-hosted
     steps:
       - name: Test Package
         run: |
@@ -27,7 +29,8 @@ jobs:
        #- run: bundle exec slather
       
   codecov:
-    needs: [bootstrap, test]
+    needs: [test]
+    runs-on: self-hosted
     steps:
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
