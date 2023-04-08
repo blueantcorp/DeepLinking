@@ -2,13 +2,6 @@ name: Build
 on: []
 
 jobs:
-  build:
-    name: Build Package
-    runs-on: self-hosted
-    steps:
-      - uses: ./.github/actions/bootstrap
-      - name: Build Package
-        run: swift build -v
 
 #  SwiftLint:
 #    runs-on: ubuntu-latest
