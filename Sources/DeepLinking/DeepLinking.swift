@@ -10,6 +10,7 @@ import Foundation
 // MARK: - DeepLink
 /// Adopted by a type whose values are matched and extracted from a URL.
 public protocol DeepLink {
+
     /// Returns a template that describes how to match and extract values from a URL.
     static var template: DeepLinkTemplate { get }
 
@@ -108,13 +109,16 @@ public struct DeepLinkTemplate {
         case double(name: String)
         case term(symbol: String)
     }
+    
     fileprivate let pathParts: [PathPart]
+    
     fileprivate let parameters: Set<QueryStringParameter>
 }
 
 // MARK: - DeepLinkRecognizer
 /// Creates a deep link object that matches a URL.
 public struct DeepLinkRecognizer {
+
     private let deepLinkTypes: [DeepLink.Type]
 
     /// Initializes a new recognizer with a list of available deep link types.
