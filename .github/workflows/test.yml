@@ -1,5 +1,5 @@
 name: Test
-on: []
+on: [push, pull_request]
 
 jobs:
   Test:
@@ -19,8 +19,8 @@ jobs:
           MINIMUM_COVERAGE: 90
           INCLUDE_TESTS: 'true'
 
-    # Slather
-#    - run: bundle exec slather
+      # Slather
+      - run: bundle exec slather
       
       # Codecov
       - name: Upload coverage to Codecov
