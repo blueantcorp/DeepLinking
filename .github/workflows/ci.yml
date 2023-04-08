@@ -65,17 +65,17 @@ jobs:
           auto_correct: true
           max_warnings: -1
 
-    docs:
-      needs: [format]
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+  docs:
+    needs: [format]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-    release:
-      needs: [build]
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
 #  Danger:
 #    - name: Danger
