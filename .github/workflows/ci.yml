@@ -18,7 +18,7 @@ jobs:
         run: swift build -v
         
   test:
-    needs: [lint]
+    needs: [danger,lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +30,7 @@ jobs:
 
   slather:
     if: ${{ false }}
-    needs: [test]
+    needs: [analyze,test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -73,6 +73,18 @@ jobs:
 
   release:
     needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+  danger:
+    needs: [format]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+  analyze:
+    needs: [danger,lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
