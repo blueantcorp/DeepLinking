@@ -12,23 +12,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6008992D29E09BBC0052471A /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".swift-version"; path = "../.swift-version"; sourceTree = "<group>"; };
-		6008992E29E09BBC0052471A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
-		6008992F29E09BBC0052471A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
-		6008993029E09BBC0052471A /* .xctool-args */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".xctool-args"; path = "../.xctool-args"; sourceTree = "<group>"; };
-		6008993129E09BBC0052471A /* .ruby-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".ruby-version"; path = "../.ruby-version"; sourceTree = "<group>"; };
-		6008993229E09BBC0052471A /* .editorconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .editorconfig; path = ../.editorconfig; sourceTree = "<group>"; };
-		6008993329E09BBC0052471A /* .overcommit.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .overcommit.yml; path = ../.overcommit.yml; sourceTree = "<group>"; };
-		6008993529E09BBC0052471A /* .clang-format */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".clang-format"; path = "../.clang-format"; sourceTree = "<group>"; };
-		6008993629E09BBC0052471A /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = ci.yml; path = ../.github/workflows/ci.yml; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.yaml; };
-		6008994129E0B2020052471A /* .slather.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .slather.yml; path = ../.slather.yml; sourceTree = "<group>"; };
-		6008994529E0BFE90052471A /* .codecov.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .codecov.yml; path = ../.codecov.yml; sourceTree = "<group>"; };
-		6008994729E0F83F0052471A /* .xcode-version */ = {isa = PBXFileReference; lastKnownFileType = text; name = ".xcode-version"; path = "../.xcode-version"; sourceTree = "<group>"; };
 		60408AEB29E01DC300D3A03A /* DeepLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkingApp.swift; sourceTree = "<group>"; };
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6095E50929E1030700323E7B /* .xcodegen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = .xcodegen.yml; path = ../.xcodegen.yml; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
+		60DE01C429E125170075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = build.yml; path = ../.github/workflows/build.yml; sourceTree = "<group>"; };
+		60DE01C529E125170075AA5D /* ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = ci.yml; path = ../.github/workflows/ci.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,19 +34,8 @@
 		6008992C29E09B810052471A /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				6008993529E09BBC0052471A /* .clang-format */,
-				6008993229E09BBC0052471A /* .editorconfig */,
-				6008992F29E09BBC0052471A /* .gitignore */,
-				6008993329E09BBC0052471A /* .overcommit.yml */,
-				6008993129E09BBC0052471A /* .ruby-version */,
-				6008992D29E09BBC0052471A /* .swift-version */,
-				6008992E29E09BBC0052471A /* .swiftlint.yml */,
-				6008993029E09BBC0052471A /* .xctool-args */,
-				6008994729E0F83F0052471A /* .xcode-version */,
-				6008994129E0B2020052471A /* .slather.yml */,
-				6095E50929E1030700323E7B /* .xcodegen.yml */,
-				6008994529E0BFE90052471A /* .codecov.yml */,
-				6008993629E09BBC0052471A /* ci.yml */,
+				60DE01C429E125170075AA5D /* build.yml */,
+				60DE01C529E125170075AA5D /* ci.yml */,
 			);
 			name = Configs;
 			sourceTree = "<group>";
