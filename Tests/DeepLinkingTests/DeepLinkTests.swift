@@ -206,7 +206,7 @@ class DeepLinkingTests: XCTestCase {
         let recognizer = DeepLinkRecognizer(deepLinkTypes: [IntDeepLink.self,
                                                             BoolDeepLink.self,
                                                             DoubleDeepLink.self,
-                                                            StringDeepLink.self,])
+                                                            StringDeepLink.self, ])
         let url = URL(string: "test://3.14")!
         if let deepLink = recognizer.deepLink(matching: url) as? DoubleDeepLink {
             XCTAssertEqual(deepLink.number, 3.14)
