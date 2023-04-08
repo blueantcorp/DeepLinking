@@ -2,6 +2,6 @@ name: 'Bootstrap'
 description: 'Bootstrap description'
 
 runs:
-  using: 'ubuntu-latest'
+  using: 'self-hosted'
   steps:
     - uses: 'actions/checkout@v3

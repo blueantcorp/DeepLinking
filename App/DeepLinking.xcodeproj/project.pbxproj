@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		60408AEF29E01DC300D3A03A /* DeepLinkingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */; };
 		60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60408AF229E01DC400D3A03A /* Assets.xcassets */; };
+		60DE01D629E14A550075AA5D /* .actrc in Resources */ = {isa = PBXBuildFile; fileRef = 60DE01D529E14A550075AA5D /* .actrc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		60DE01D029E139420075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = build.yml; sourceTree = "<group>"; };
 		60DE01D329E139420075AA5D /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
 		60DE01D429E139420075AA5D /* dependabot.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = dependabot.yml; sourceTree = "<group>"; };
+		60DE01D529E14A550075AA5D /* .actrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .actrc; path = ../.actrc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 		6008992C29E09B810052471A /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				60DE01D529E14A550075AA5D /* .actrc */,
 				60DE01CC29E139420075AA5D /* .github */,
 			);
 			name = Configs;
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */,
+				60DE01D629E14A550075AA5D /* .actrc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
