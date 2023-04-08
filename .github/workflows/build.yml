@@ -2,12 +2,10 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  Build:
-    uses: ./.github/actions/bootstrap
+  build:
+    name: Build Package
     steps:
-      - uses: actions/checkout@v3
-      
-      # Build
+      - uses: ./.github/actions/bootstrap
       - name: Build Package
         run: swift build -v
 
