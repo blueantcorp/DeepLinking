@@ -5,13 +5,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: blueantcorp/DeepLinking/.github/workflows/env.yml
+      - uses: actions/checkout@v3
       - name: Build Package
         run: swift build -v
         
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Test Package
         run: |
           swift test \
@@ -22,12 +23,12 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up ruby env
-      uses: ruby/setup-ruby@v1.138.0
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: true
+      - uses: actions/checkout@v3
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1.138.0
+          with:
+            ruby-version: 3.2.2
+            bundler-cache: true
 
     - run: bundle exec slather
       
@@ -35,6 +36,7 @@ jobs:
     needs: [slather]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
           MINIMUM_COVERAGE: 90

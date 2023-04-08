@@ -21,7 +21,6 @@
 		606192DD29E15C1E00DC08D8 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
 		606192E029E15C1E00DC08D8 /* action.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
 		606192E129E15C1E00DC08D8 /* dependabot.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = dependabot.yml; sourceTree = "<group>"; };
-		606192E529E1660800DC08D8 /* env.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = env.yml; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				606192DD29E15C1E00DC08D8 /* ci.yml */,
-				606192E529E1660800DC08D8 /* env.yml */,
 			);
 			path = workflows;
 			sourceTree = "<group>";
