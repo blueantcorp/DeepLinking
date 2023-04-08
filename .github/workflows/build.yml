@@ -11,11 +11,7 @@ jobs:
       
       # Build
       - name: Build Package
-        run: | 
-          swift build \
-            --enable-test-discovery \
-            --enable-code-coverage
-  
+        run: swift build -v
 
 #  SwiftLint:
 #    runs-on: ubuntu-latest
