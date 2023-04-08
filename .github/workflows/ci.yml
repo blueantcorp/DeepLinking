@@ -1,46 +1,59 @@
-name: Build
+name: CI
 on: [push, pull_request]
 
 jobs:
-  Build:
-    container:
-      image: swift:5.8
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        
+  build:
+    needs: [lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      # Build
       - name: Build Package
-        run: | 
-          swift build \
+        run: swift build -v
+        
+  test:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test Package
+        run: |
+          swift test \
             --enable-test-discovery \
             --enable-code-coverage
-  
 
-#  SwiftLint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
+  slather:
+    if: ${{ false }}
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1.138.0
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
 
-      # - name: GitHub Action for SwiftLint
-      #   uses: norio-nomura/action-swiftlint@3.2.1
+      - run: bundle exec slather
       
-      # - name: GitHub Action for SwiftLint with --strict
-      #   uses: norio-nomura/action-swiftlint@3.2.1
-      #   with:
-      #     args:
-      #       --strict
-      #       --
-      
-      # - name: GitHub Action for SwiftLint (Only files changed in the PR)
-      #   uses: norio-nomura/action-swiftlint@3.2.1
-      #   env:
-      #     DIFF_BASE: ${{ github.base_ref }}
- 
-      # - name: GitHub Action for SwiftLint (Different working directory)
-      #   uses: norio-nomura/action-swiftlint@3.2.1
-      #   env:
-      #     WORKING_DIRECTORY: Source
+  codecov:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mattpolzin/swift-codecov-action@0.7.5
+        with:
+          MINIMUM_COVERAGE: 90
+          INCLUDE_TESTS: 'true'
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
 
 #  Danger:
 #    - name: Danger

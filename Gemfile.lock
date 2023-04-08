@@ -283,8 +283,8 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
-  danger (~> 8.2)
-  danger-xcov (~> 0.5.0)
+  danger
+  danger-xcov
   slather
   xcpretty
 
