@@ -1,3 +1,9 @@
+included:
+  - Source
+
+excluded:
+  - Carthage
+
 opt_in_rules:
 - attributes
 - closure_end_indentation
@@ -24,12 +30,6 @@ disabled_rules:
 - superfluous_disable_command
 - large_tuple
 - switch_case_on_newline
-
-included:
-- Source
-
-excluded:
-- Carthage
 
 line_length:
   warning: 160
