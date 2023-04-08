@@ -20,7 +20,7 @@ jobs:
             --enable-code-coverage
 
   slather:
-    needs: [test]
+    needs: [build, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
