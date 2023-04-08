@@ -3,10 +3,9 @@ on: [push, pull_request]
 
 jobs:
   Build:
+    uses: ./.github/actions/bootstrap
     steps:
       - uses: actions/checkout@v3
-      - name: Bootstrap
-        uses: ./.github/actions/bootstrap
       
       # Build
       - name: Build Package
