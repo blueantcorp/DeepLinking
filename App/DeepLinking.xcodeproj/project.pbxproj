@@ -9,18 +9,12 @@
 /* Begin PBXBuildFile section */
 		60408AEF29E01DC300D3A03A /* DeepLinkingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */; };
 		60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60408AF229E01DC400D3A03A /* Assets.xcassets */; };
-		606192E229E15C1E00DC08D8 /* ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 606192DD29E15C1E00DC08D8 /* ci.yml */; };
-		606192E329E15C1E00DC08D8 /* action.yml in Resources */ = {isa = PBXBuildFile; fileRef = 606192E029E15C1E00DC08D8 /* action.yml */; };
-		606192E429E15C1E00DC08D8 /* dependabot.yml in Resources */ = {isa = PBXBuildFile; fileRef = 606192E129E15C1E00DC08D8 /* dependabot.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		60408AEB29E01DC300D3A03A /* DeepLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkingApp.swift; sourceTree = "<group>"; };
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		606192DD29E15C1E00DC08D8 /* ci.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = ci.yml; sourceTree = "<group>"; };
-		606192E029E15C1E00DC08D8 /* action.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
-		606192E129E15C1E00DC08D8 /* dependabot.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = dependabot.yml; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -38,7 +32,6 @@
 		60408AE229E01DC300D3A03A = {
 			isa = PBXGroup;
 			children = (
-				606192DB29E15C1E00DC08D8 /* .github */,
 				609B5B6C29E021CD003F2C87 /* DeepLink */,
 				60408AFC29E01F4400D3A03A /* App */,
 				60408AEC29E01DC300D3A03A /* Products */,
@@ -60,41 +53,6 @@
 				60408AF229E01DC400D3A03A /* Assets.xcassets */,
 			);
 			name = App;
-			sourceTree = "<group>";
-		};
-		606192DB29E15C1E00DC08D8 /* .github */ = {
-			isa = PBXGroup;
-			children = (
-				606192DC29E15C1E00DC08D8 /* workflows */,
-				606192DE29E15C1E00DC08D8 /* actions */,
-				606192E129E15C1E00DC08D8 /* dependabot.yml */,
-			);
-			name = .github;
-			path = ../.github;
-			sourceTree = "<group>";
-		};
-		606192DC29E15C1E00DC08D8 /* workflows */ = {
-			isa = PBXGroup;
-			children = (
-				606192DD29E15C1E00DC08D8 /* ci.yml */,
-			);
-			path = workflows;
-			sourceTree = "<group>";
-		};
-		606192DE29E15C1E00DC08D8 /* actions */ = {
-			isa = PBXGroup;
-			children = (
-				606192DF29E15C1E00DC08D8 /* bootstrap */,
-			);
-			path = actions;
-			sourceTree = "<group>";
-		};
-		606192DF29E15C1E00DC08D8 /* bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				606192E029E15C1E00DC08D8 /* action.yml */,
-			);
-			path = bootstrap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +113,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				606192E429E15C1E00DC08D8 /* dependabot.yml in Resources */,
-				606192E229E15C1E00DC08D8 /* ci.yml in Resources */,
-				606192E329E15C1E00DC08D8 /* action.yml in Resources */,
 				60408AF329E01DC400D3A03A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
