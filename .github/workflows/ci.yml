@@ -2,30 +2,13 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  bootstrap:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        
-      - name: Install Bundler
-        run: |
-            bundle install \
-                --without=documentation \
-                --jobs 4 \
-                --retry 3
-    
   build:
-    needs: [bootstrap]
     steps:
-#      - uses: ./.github/actions/bootstrap
+      - uses: blueantcorp/DeepLinking/.github/workflows/env.yml
       - name: Build Package
         run: swift build -v
         
   test:
-    needs: [bootstrap]
     steps:
       - name: Test Package
         run: |
