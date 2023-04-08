@@ -18,6 +18,7 @@
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
 		60DE01C429E125170075AA5D /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = build.yml; path = ../.github/workflows/build.yml; sourceTree = "<group>"; };
 		60DE01C529E125170075AA5D /* test.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = test.yml; path = ../.github/workflows/test.yml; sourceTree = "<group>"; };
+		60DE01C629E127DE0075AA5D /* lint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = lint.yml; path = ../.github/workflows/lint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +36,7 @@
 			isa = PBXGroup;
 			children = (
 				60DE01C429E125170075AA5D /* build.yml */,
+				60DE01C629E127DE0075AA5D /* lint.yml */,
 				60DE01C529E125170075AA5D /* test.yml */,
 			);
 			name = Configs;

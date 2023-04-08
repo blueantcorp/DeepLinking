@@ -3,8 +3,6 @@ on: [push, pull_request]
 
 jobs:
   Test:
-    container:
-      image: swift:5.8
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
