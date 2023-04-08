@@ -61,11 +61,11 @@ jobs:
 #                --retry 3
 
       # Slather
-      - run: bundle exec slather
-        env:
-          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
-          CI_PULL_REQUEST: ${{ github.event.number }}
-          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - run: bundle exec slather
+#        env:
+#          GIT_BRANCH: ${{ steps.get_branch.outputs.branch }}
+#          CI_PULL_REQUEST: ${{ github.event.number }}
+#          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Danger
       #   run: bundle exec danger

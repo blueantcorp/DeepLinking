@@ -229,12 +229,9 @@ public struct DeepLinkRecognizer {
 
 // MARK: - QueryStringParameter extension
 extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
-    public var hashValue: Int {
-        return name.hashValue
-    }
 
-    public static func ==(lhs: DeepLinkTemplate.QueryStringParameter, rhs: DeepLinkTemplate.QueryStringParameter) -> Bool {
-        return lhs.name == rhs.name
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 
     fileprivate var name: String {
