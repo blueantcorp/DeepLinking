@@ -12,11 +12,12 @@ jobs:
     name: Build Package
     needs: [bootstrap]
     steps:
-      - uses: ./.github/actions/bootstrap
+#      - uses: ./.github/actions/bootstrap
       - name: Build Package
         run: swift build -v
         
   test:
+    name: Test Package
     needs: [bootstrap]
     steps:
       - name: Test Package
