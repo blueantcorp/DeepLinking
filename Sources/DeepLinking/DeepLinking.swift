@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - DeepLink
+
 /// Adopted by a type whose values are matched and extracted from a URL.
 public protocol DeepLink {
     /// Returns a template that describes how to match and extract values from a URL.
@@ -19,6 +20,7 @@ public protocol DeepLink {
 }
 
 // MARK: - DeepLinkValues
+
 /// Data values extracted from a URL by a deep link template.
 public struct DeepLinkValues {
     /// Values in the URL's path, whose keys are the names specified in a deep link template.
@@ -38,47 +40,49 @@ public struct DeepLinkValues {
 }
 
 // MARK: - DeepLinkTemplate
+
 /// Describes how to extract a deep link's values from a URL.
 /// A template is considered to match a URL if all of its required values are found in the URL.
 public struct DeepLinkTemplate {
     // MARK: - Public API
+
     public init() {
         self.init(pathParts: [], parameters: [])
     }
 
     /// A matching URL must include this constant string at the correct location in its path.
     public func term(_ symbol: String) -> DeepLinkTemplate {
-        return appending(pathPart: .term(symbol: symbol))
+        appending(pathPart: .term(symbol: symbol))
     }
 
     /// A matching URL must include a string at the correct location in its path.
     /// - Parameter name: The key of this string in the `path` dictionary of `DeepLinkValues`.
     public func string(named name: String) -> DeepLinkTemplate {
-        return appending(pathPart: .string(name: name))
+        appending(pathPart: .string(name: name))
     }
 
     /// A matching URL must include an integer at the correct location in its path.
     /// - Parameter name: The key of this integer in the `path` dictionary of `DeepLinkValues`.
     public func int(named name: String) -> DeepLinkTemplate {
-        return appending(pathPart: .int(name: name))
+        appending(pathPart: .int(name: name))
     }
 
     /// A matching URL must include a double at the correct location in its path.
     /// - Parameter name: The key of this double in the `path` dictionary of `DeepLinkValues`.
     public func double(named name: String) -> DeepLinkTemplate {
-        return appending(pathPart: .double(name: name))
+        appending(pathPart: .double(name: name))
     }
 
     /// A matching URL must include a boolean at the correct location in its path.
     /// - Parameter name: The key of this boolean in the `path` dictionary of `DeepLinkValues`.
     public func bool(named name: String) -> DeepLinkTemplate {
-        return appending(pathPart: .bool(name: name))
+        appending(pathPart: .bool(name: name))
     }
 
     /// An unordered set of query string parameters.
     /// - Parameter queryStringParameters: A set of parameters that may be required or optional.
     public func queryStringParameters(_ queryStringParameters: Set<QueryStringParameter>) -> DeepLinkTemplate {
-        return DeepLinkTemplate(pathParts: pathParts, parameters: queryStringParameters)
+        DeepLinkTemplate(pathParts: pathParts, parameters: queryStringParameters)
     }
 
     /// A named value in a URL's query string.
@@ -90,16 +94,18 @@ public struct DeepLinkTemplate {
     }
 
     // MARK: - Private creation methods
+
     private init(pathParts: [PathPart], parameters: Set<QueryStringParameter>) {
         self.pathParts = pathParts
         self.parameters = parameters
     }
 
     private func appending(pathPart: PathPart) -> DeepLinkTemplate {
-        return DeepLinkTemplate(pathParts: pathParts + [pathPart], parameters: parameters)
+        DeepLinkTemplate(pathParts: pathParts + [pathPart], parameters: parameters)
     }
 
     // MARK: - State
+
     fileprivate enum PathPart {
         case int(name: String)
         case bool(name: String)
@@ -107,11 +113,13 @@ public struct DeepLinkTemplate {
         case double(name: String)
         case term(symbol: String)
     }
+
     fileprivate let pathParts: [PathPart]
     fileprivate let parameters: Set<QueryStringParameter>
 }
 
 // MARK: - DeepLinkRecognizer
+
 /// Creates a deep link object that matches a URL.
 public struct DeepLinkRecognizer {
     private let deepLinkTypes: [DeepLink.Type]
@@ -134,6 +142,7 @@ public struct DeepLinkRecognizer {
     }
 
     // MARK: - URL value extraction
+
     private static func extractValues(in template: DeepLinkTemplate, from url: URL) -> DeepLinkValues? {
         guard let pathValues = extractPathValues(in: template, from: url) else { return nil }
         guard let queryValues = extractQueryValues(in: template, from: url) else { return nil }
@@ -219,8 +228,8 @@ public struct DeepLinkRecognizer {
     private static func value(of parameter: DeepLinkTemplate.QueryStringParameter, in queryMap: QueryMap) -> Any? {
         guard let value: String = queryMap[parameter.name] else { return nil }
         switch parameter.type {
-        case .int:    return Int(value)
-        case .bool:   return Bool(value)
+        case .int: return Int(value)
+        case .bool: return Bool(value)
         case .double: return Double(value)
         case .string: return value.removingPercentEncoding ?? ""
         }
@@ -228,20 +237,20 @@ public struct DeepLinkRecognizer {
 }
 
 // MARK: - QueryStringParameter extension
-extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
 
+extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
 
     fileprivate var name: String {
         switch self {
-        case let .requiredInt(name):    return name
-        case let .requiredBool(name):   return name
+        case let .requiredInt(name): return name
+        case let .requiredBool(name): return name
         case let .requiredDouble(name): return name
         case let .requiredString(name): return name
-        case let .optionalInt(name):    return name
-        case let .optionalBool(name):   return name
+        case let .optionalInt(name): return name
+        case let .optionalBool(name): return name
         case let .optionalDouble(name): return name
         case let .optionalString(name): return name
         }
@@ -250,8 +259,8 @@ extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
     fileprivate enum ParameterType { case string, int, double, bool }
     fileprivate var type: ParameterType {
         switch self {
-        case .requiredInt, .optionalInt:    return .int
-        case .requiredBool, .optionalBool:   return .bool
+        case .requiredInt, .optionalInt: return .int
+        case .requiredBool, .optionalBool: return .bool
         case .requiredDouble, .optionalDouble: return .double
         case .requiredString, .optionalString: return .string
         }
