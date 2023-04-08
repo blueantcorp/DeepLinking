@@ -12,6 +12,6 @@ test:
 		.build/debug/{PACKAGE_NAME}PackageTests.xctest \
 		-instr-profile .build/debug/codecov/default.profdata > info.lcov
 
-#	@bash <(curl -s https://codecov.io/bash) \
-#		-J DeepLinking \
-#		-D .build/derivedData
+	@bash <(curl -s https://codecov.io/bash) \
+		-J DeepLinking \
+		-D .build/derivedData
