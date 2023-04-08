@@ -16,6 +16,7 @@
 		60408AEE29E01DC300D3A03A /* DeepLinkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkingApp.swift; sourceTree = "<group>"; };
 		60408AF229E01DC400D3A03A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		606192E629E1935400DC08D8 /* ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = ci.yml; path = ../.github/workflows/ci.yml; sourceTree = "<group>"; };
+		606192E729E196DA00DC08D8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
 		609B5B6C29E021CD003F2C87 /* DeepLink */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeepLink; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -33,6 +34,7 @@
 		60408AE229E01DC300D3A03A = {
 			isa = PBXGroup;
 			children = (
+				606192E729E196DA00DC08D8 /* .swiftlint.yml */,
 				606192E629E1935400DC08D8 /* ci.yml */,
 				609B5B6C29E021CD003F2C87 /* DeepLink */,
 				60408AFC29E01F4400D3A03A /* App */,

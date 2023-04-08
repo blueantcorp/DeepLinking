@@ -2,7 +2,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  swiftLint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -10,6 +10,7 @@ jobs:
         uses: norio-nomura/action-swiftlint@3.2.1
         
   build:
+    needs: [lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,6 +18,7 @@ jobs:
         run: swift build -v
         
   test:
+    needs: [lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,6 +29,7 @@ jobs:
             --enable-code-coverage
 
   slather:
+    if: ${{ false }}
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +43,7 @@ jobs:
       - run: bundle exec slather
       
   codecov:
-    needs: [slather]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
