@@ -26,25 +26,32 @@ jobs:
       #   uses: norio-nomura/action-swiftlint@3.2.1
       #   env:
       #     WORKING_DIRECTORY: Source
-
+  Build:
+    container:
+      image: swift:5.8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: swift test --enable-test-discovery --enable-code-coverage
+  
   Test:
     container:
       image: swift:5.8
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: swift test --enable-test-discovery --enable-code-coverage
-    - uses: mattpolzin/swift-codecov-action@0.7.5
-      with:
-        MINIMUM_COVERAGE: 90
-        INCLUDE_TESTS: 'true'
+      - uses: actions/checkout@v3
+      - run: swift test --enable-test-discovery --enable-code-coverage
+      - uses: mattpolzin/swift-codecov-action@0.7.5
+        with:
+          MINIMUM_COVERAGE: 90
+          INCLUDE_TESTS: 'true'
 
     # Slather
 #    - run: bundle exec slather
       
     # Codecov
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
 
 #  Danger:
 #    - name: Danger
