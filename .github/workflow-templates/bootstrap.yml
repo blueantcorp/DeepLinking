@@ -1,0 +1,21 @@
+name: Bootstrap
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    container:
+      image: swift:5.8
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run a one-line script
+      run: echo Hello World
