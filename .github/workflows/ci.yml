@@ -6,10 +6,19 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        
+      - name: Install Bundler
+        run: |
+            bundle install \
+                --without=documentation \
+                --jobs 4 \
+                --retry 3
     
   build:
     needs: [bootstrap]
-    runs-on: ubuntu-latest
     steps:
 #      - uses: ./.github/actions/bootstrap
       - name: Build Package
@@ -17,7 +26,6 @@ jobs:
         
   test:
     needs: [bootstrap]
-    runs-on: ubuntu-latest
     steps:
       - name: Test Package
         run: |
