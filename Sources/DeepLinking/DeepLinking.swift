@@ -109,9 +109,9 @@ public struct DeepLinkTemplate {
         case double(name: String)
         case term(symbol: String)
     }
-    
+
     fileprivate let pathParts: [PathPart]
-    
+
     fileprivate let parameters: Set<QueryStringParameter>
 }
 
@@ -140,26 +140,26 @@ public struct DeepLinkRecognizer {
 
     // MARK: - URL value extraction
     private static func extractValues(in template: DeepLinkTemplate, from url: URL) -> DeepLinkValues? {
-        
+
         guard let pathValues = extractPathValues(in: template, from: url) else { return nil }
-        
+
         guard let queryValues = extractQueryValues(in: template, from: url) else { return nil }
-        
+
         return DeepLinkValues(path: pathValues, query: queryValues, fragment: url.fragment)
     }
 
     private static func extractPathValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
-        
+
         let allComponents = url.host.map { [$0] + url.pathComponents } ?? url.pathComponents
-        
+
         let components = allComponents
             .filter { $0 != "/" }
             .map { $0.removingPercentEncoding ?? "" }
-        
+
         guard components.count == template.pathParts.count else { return nil }
-        
+
         var values = [String: Any]()
-        
+
         for (pathPart, component) in zip(template.pathParts, components) {
             switch pathPart {
             case let .int(name):
