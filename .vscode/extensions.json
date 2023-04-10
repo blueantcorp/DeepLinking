@@ -4,6 +4,7 @@
         "github.copilot-nightly",
         "github.copilot-labs",
         "github.remotehub",
-        "saber2pr.file-git-history"
+        "saber2pr.file-git-history",
+        "alphaxek.github-actions-locally"
     ]
 }

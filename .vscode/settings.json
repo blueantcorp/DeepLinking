@@ -1,3 +1,7 @@
 {
-    "sourcegraph.url": "http://127.0.0.1:3080"
+    "sourcegraph.url": "http://127.0.0.1:3080",
+    "sonarlint.connectedMode.project": {
+        "connectionId": "blueantcorp",
+        "projectKey": "blueantcorp_DeepLinking"
+    }
 }
