@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1gh
+        uses: norio-nomura/action-swiftlint@3.2.1
 
   analyze:
     needs: [danger]
