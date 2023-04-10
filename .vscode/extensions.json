@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "leneti.yaml-fm-lint",
-        "github.copilot-nightly"
+        "github.copilot-nightly",
+        "github.copilot-labs"
     ]
 }
