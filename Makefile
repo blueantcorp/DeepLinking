@@ -15,3 +15,6 @@ test:
 	@bash <(curl -s https://codecov.io/bash) \
 		-J DeepLinking \
 		-D .build/derivedData
+
+	@rm -rf .build
+	
