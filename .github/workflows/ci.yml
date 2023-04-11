@@ -10,7 +10,7 @@ jobs:
         uses: norio-nomura/action-swiftlint@3.2.1
 
   analyze:
-    needs: [danger]
+    needs: [danger, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
