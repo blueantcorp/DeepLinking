@@ -24,7 +24,7 @@ jobs:
     needs: [bootstrap]
     runs-on: ubuntu-latest
     uses: ./.github/workflows/validate.yml
-    secrets: inherit
+    # secrets: inherit
 
   build:
     needs: [validate]
