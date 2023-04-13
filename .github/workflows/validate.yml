@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: MeilCli/danger-action@v5
       with:
-        install_path: '/usr/local/bin'
+        install_path: '.vendor/bundle'
         danger_file: '.github/Dangerfile'
         danger_id: 'danger-pr'
       # env:
