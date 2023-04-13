@@ -10,14 +10,17 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
-    - uses: actions/cache@v1
-      with:
-        path: .vendor/bundle
-        bundler-cache: true
-        key: ${{ runner.os }}-gems-${{ hashFiles('.github/Gemfile') }} # change your gemfile path
-        restore-keys: |
-          ${{ runner.os }}-gems-
+  - uses: actions/checkout@v3
+
+  # Cache the Ruby gems
+  - uses: ruby/setup-ruby@v1
+    with:
+      bundler-cache: true
+
+  # Cache the SwiftPM dependencies
+  - uses: actions/cache@v3
+    with:
+      path: .build
+      key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+      restore-keys: |
+        ${{ runner.os }}-spm-

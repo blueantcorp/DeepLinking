@@ -25,17 +25,13 @@ jobs:
           ./swiftlint.log
   
   danger:
-    name: Run Danger
     runs-on: ubuntu-latest
+    name: "Run Danger"
     steps:
     - uses: actions/checkout@v3
+    - name: Danger
+      uses: danger/swift@3.15.0
       with:
-        fetch-depth: 0
-    
-    - uses: MeilCli/danger-action@v5
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        dangerfile_path: ./Dangerfile
-        danger_id: ${{ github.event.pull_request.head.sha }}
-        danger_version: 10.5.0
-        danger_plugins:
+          args: --failOnErrors --no-publish-check
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

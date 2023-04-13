@@ -5,32 +5,7 @@ jobs:
   bootstrap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      # Cache the Ruby gems
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-  
-      
-      # Cache the Ruby gems
-      - uses: actions/cache@v3
-        with:
-          path: .vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
-      # Cache the SwiftPM dependencies
-      - uses: actions/cache@v3
-        with:
-          path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
-
-      
-      - uses: ./.github/workflows/validate.yml
+    - uses: ./.github/actions/bootstrap    
   
   # validate:
   #   needs: [bootstrap]
