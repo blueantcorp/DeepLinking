@@ -1,6 +1,12 @@
 name: Validate
 on:
     workflow_call:
+      inputs:
+        runs-on:
+          description: 'The type of runner that the job will run on'
+          default: ubuntu-latest
+          required: true
+          type: string
 
 jobs:
   SwiftPackage:
