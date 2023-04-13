@@ -1,16 +1,10 @@
 name: Validate
 on:
     workflow_call:
-      inputs:
-        runs-on:
-          description: 'The type of runner that the job will run on'
-          default: ubuntu-latest
-          required: true
-          type: string
 
 jobs:
   SwiftPackage:
-    runs-on: composite
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -19,7 +13,7 @@ jobs:
       run: swift package validate 
 
   SwiftLint:
-    runs-on: composite
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -30,7 +24,7 @@ jobs:
         args: --strict --config ./.swiftlint.yml
   
   Danger:
-    runs-on: composite
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
