@@ -18,6 +18,8 @@ jobs:
         with:
           bundler-cache: true
       - uses: MeilCli/danger-action@v5
+        with: 
+          danger_file: 'Dangerfile'
 
   build:
     needs: [danger, lint]
@@ -46,7 +48,7 @@ jobs:
 
   slather:
     if: ${{ false }}
-    needs: [analyze, test]
+    needs: [analyze]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
