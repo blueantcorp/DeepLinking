@@ -11,6 +11,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+  
       
       # Cache the Ruby gems
       - uses: actions/cache@v3
@@ -27,13 +28,16 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
+
+      
+      - uses: ./.github/workflows/validate.yml
   
-  validate:
-    needs: [bootstrap]
-    uses: ./.github/workflows/validate.yml
+  # validate:
+  #   needs: [bootstrap]
+  #   uses: ./.github/workflows/validate.yml
     
   build:
-    needs: [validate]
+    needs: [bootstrap]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
