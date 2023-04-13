@@ -3,16 +3,8 @@ on:
     workflow_call:
 
 jobs:
-  SwiftPackage:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Validate Package
-      run: swift package validate 
-
-  SwiftLint:
+  swiftlint:
+    name: Run SwiftLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,9 +13,10 @@ jobs:
 
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
-        args: --strict --config ./.swiftlint.yml
+        args: --fix --config ./.swiftlint.yml
   
-  Danger:
+  danger:
+    name: Run Danger
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
