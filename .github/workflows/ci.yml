@@ -2,7 +2,6 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-
   bootstrap:
     runs-on: ubuntu-latest
     steps:
@@ -11,11 +10,12 @@ jobs:
 
   lint:
     needs: [bootstrap]
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - uses: norio-nomura/action-swiftlint@3.2.1
 
   danger:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: MeilCli/danger-action@v5
