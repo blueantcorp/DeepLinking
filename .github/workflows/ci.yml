@@ -40,6 +40,36 @@ jobs:
           swift test \
             --enable-test-discovery \
             --enable-code-coverage
+  
+  codecov:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mattpolzin/swift-codecov-action@0.7.5
+        with:
+          MINIMUM_COVERAGE: 90
+          INCLUDE_TESTS: "true"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
+  sonarcloud:
+    needs: [test]
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+
+
 
   analyze:
     needs: [publish]
@@ -59,18 +89,6 @@ jobs:
           ruby-version: 3.0
           bundler-cache: true
       - run: bundle exec slather
-
-  codecov:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: mattpolzin/swift-codecov-action@0.7.5
-        with:
-          MINIMUM_COVERAGE: 90
-          INCLUDE_TESTS: "true"
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
 
   format:
     needs: [publish]
@@ -102,17 +120,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-  sonarcloud:
-    needs: [publish]
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
