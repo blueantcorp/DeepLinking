@@ -7,10 +7,6 @@ jobs:
     name: Run SwiftLint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --fix --config ./.swiftlint.yml
@@ -19,12 +15,9 @@ jobs:
     name: Run Danger
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
     - uses: MeilCli/danger-action@v5
       with:
+        install_path: '/usr/local/bin'
         danger_file: '.github/Dangerfile'
         danger_id: 'danger-pr'
       # env:
