@@ -4,6 +4,15 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
+    - uses: actions/cache@v1
+      with:
+        path: .vendor/bundle
+        bundler-cache: true
+        key: ${{ runner.os }}-gems-${{ hashFiles('.github/Gemfile') }} # change your gemfile path
+        restore-keys: |
+          ${{ runner.os }}-gems-
     - uses: ruby/setup-ruby@v1.138.0
       with:
-        bundler-cache: true
