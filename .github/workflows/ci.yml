@@ -3,7 +3,6 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +23,7 @@ jobs:
           danger_file: 'Dangerfile'
 
   build:
-    needs: [danger]
+    needs: [danger, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -100,7 +99,6 @@ jobs:
   publish:
     if: ${{ false }}
     name: Publish on GitHub
-    needs: [danger]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
