@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Cache the Ruby gems
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       
