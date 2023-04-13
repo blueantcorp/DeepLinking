@@ -1,5 +1,12 @@
 name: bootstrap
 description: bootstrap project descr
+
+inputs:
+  ruby-version:
+    description: 'Ruby version'
+    required: true
+    default: '2.6'
+
 runs:
   using: composite
   steps:
@@ -14,5 +21,3 @@ runs:
         key: ${{ runner.os }}-gems-${{ hashFiles('.github/Gemfile') }} # change your gemfile path
         restore-keys: |
           ${{ runner.os }}-gems-
-    - uses: ruby/setup-ruby@v1.138.0
-      with:

@@ -8,23 +8,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/bootstrap/
 
-  lint:
+  validate:
     needs: [bootstrap]
     runs-on: ubuntu-latest
     steps:
       - uses: norio-nomura/action-swiftlint@3.2.1
-
-  danger:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: MeilCli/danger-action@v5
-        with:
-          danger_id: 'danger-pr'
-          danger_file: 'Dangerfile'
+      - uses: ./.github/workflows/danger.yml
 
   build:
-    needs: [danger, lint]
+    needs: [validate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
