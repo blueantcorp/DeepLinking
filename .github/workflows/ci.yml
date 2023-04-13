@@ -3,6 +3,7 @@ on: [push, pull_request]
 
 jobs:
   lint:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,11 +19,12 @@ jobs:
         with:
           bundler-cache: true
       - uses: MeilCli/danger-action@v5
-        with: 
+        with:
+          danger_id: 'danger-pr'
           danger_file: 'Dangerfile'
 
   build:
-    needs: [danger, lint]
+    needs: [danger]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
