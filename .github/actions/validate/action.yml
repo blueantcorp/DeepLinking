@@ -1,21 +1,13 @@
-name: Validate project
+name: Validate
 description: Validate project descr
 
 runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
-
-    - name: Set up ruby env
-      uses: ruby/setup-ruby@v1.138.0
-      with:
-        bundler-cache: true
-    
-    - name: GitHub Action for SwiftLint
-      uses: norio-nomura/action-swiftlint@3.2.1
-    
+    - uses: ./actions/bootstrap
     - name: GitHub Action for Danger
       uses: MeilCli/danger-action@v5
       with:
-        danger_id: danger-pr
+        danger_id: danger-push
         danger_file: Dangerfile
