@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: norio-nomura/action-swiftlint@3.2.1
-      with:
-        args: --fix --config ./.swiftlint.yml
+      # with:
+      #   args: --fix --config ./.swiftlint.yml
   
   danger:
     name: Run Danger
