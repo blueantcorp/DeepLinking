@@ -8,9 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: validate
-        uses: ./.github/actions/validate/
+      - uses: ./.github/actions/bootstrap/
+      - uses: ./.github/actions/validate/
 
   lint:
     if: ${{ false }}
