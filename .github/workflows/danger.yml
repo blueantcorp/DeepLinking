@@ -1,4 +1,4 @@
-name: CI
+name: Danger
 on:
     workflow_call:
 
@@ -8,7 +8,6 @@ jobs:
     steps:
     - uses: MeilCli/danger-action@v5
       with:
-        plugins_file: '.github/Gemfile'
         danger_file: '.github/Dangerfile'
         danger_id: 'danger-pr'
       env:

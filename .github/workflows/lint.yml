@@ -1,5 +1,6 @@
 name: Lint
 on:
+  workflow_call:
   pull_request:
     paths:
       - '.github/workflows/lint.yml'
@@ -8,10 +9,7 @@ on:
 
 jobs:
   SwiftLint:
-    runs-on: ubuntu-latest
+    runs-on: composite
     steps:
       - uses: actions/checkout@v3
-      
-      # Lint
-      - name: Lint code using SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
+      - uses: norio-nomura/action-swiftlint@3.2.1

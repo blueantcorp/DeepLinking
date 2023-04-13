@@ -20,15 +20,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
-  validate:
+  lint:
     needs: [bootstrap]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: norio-nomura/action-swiftlint@3.2.1
-      - uses: ./.github/workflows/danger.yml
+    uses: ./.github/workflows/lint.yml
+  
+  danger:
+    needs: [bootstrap]
+    uses: ./.github/workflows/danger.yml
 
   build:
-    needs: [validate]
+    needs: [danger, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
