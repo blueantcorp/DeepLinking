@@ -21,12 +21,14 @@ jobs:
             ${{ runner.os }}-spm-
 
   lint:
+    if: ${{ false }}
     needs: [bootstrap]
     uses: ./.github/workflows/lint.yml
   
   danger:
-    needs: [bootstrap]
     uses: ./.github/workflows/danger.yml
+    needs: [bootstrap]
+    secrets: inherit
 
   build:
     needs: [danger, lint]

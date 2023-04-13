@@ -1,9 +1,17 @@
-name: Danger
+name: Validate
 on:
     workflow_call:
 
 jobs:
-  danger:
+  SwiftLint:
+    runs-on: composite
+    steps:
+      - uses: actions/checkout@v3
+      - uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict --config ./.swiftlint.yml
+  
+  Danger:
     runs-on: composite
     steps:
     - uses: MeilCli/danger-action@v5
