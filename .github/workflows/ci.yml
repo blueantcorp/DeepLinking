@@ -19,19 +19,14 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
-
-  lint:
-    if: ${{ false }}
-    needs: [bootstrap]
-    uses: ./.github/workflows/lint.yml
   
-  danger:
-    uses: ./.github/workflows/danger.yml
+  validate:
     needs: [bootstrap]
+    uses: ./.github/workflows/validate.yml
     secrets: inherit
 
   build:
-    needs: [danger, lint]
+    needs: [validate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
