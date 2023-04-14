@@ -18,7 +18,7 @@ runs:
     continue-on-error: true
 
   - name: Install Swift tools
-    run: echo 'Hallloo!!!! ${{ github.workspace }}'
+    run: ls -l
     shell: bash
 
   # Install Ruby gems
