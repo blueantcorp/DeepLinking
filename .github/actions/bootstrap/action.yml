@@ -14,16 +14,16 @@ runs:
   
   # Cache build artifacts
   - name: Restore buildcache
-    uses: mikehardy/buildcache-action@v1
+    uses: mikehardy/buildcache-action@v2
     continue-on-error: true
 
   # Install Ruby gems
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
     with:
+      bundler-cache: true
       working-directory: ${{ github.workspace }}
       ruby-version: ${{ inputs.ruby-version }}
-      bundler-cache: true
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
