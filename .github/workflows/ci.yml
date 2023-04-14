@@ -39,8 +39,21 @@ jobs:
           --enable-test-discovery \
           --enable-code-coverage
 
-  danger:
+  slather:
+    if: ${{ false }}
     needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1.138.0
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - run: bundle exec slather
+          
+  danger:
+    needs: [slather]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -58,22 +71,8 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
         DANGER_GITHUB_API_TOKEN: ${{ github.token }}
         DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
-
-  slather:
-    if: ${{ false }}
-    needs: [analyze]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up ruby env
-      uses: ruby/setup-ruby@v1.138.0
-      with:
-        ruby-version: 3.0
-        bundler-cache: true
-    - run: bundle exec slather
-  
   codecov:
-    needs: [danger]
+    needs: [slather]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -85,7 +84,7 @@ jobs:
       uses: codecov/codecov-action@v3
 
   sonarcloud:
-    needs: [danger]
+    needs: [slather]
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
