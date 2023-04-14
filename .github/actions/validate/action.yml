@@ -1,5 +1,10 @@
 name: Validate
 description: Validate project descr
+inputs:
+  github-token:
+    description: GitHub token
+    required: true
+    default: ${{ github.token }}
 
 runs:
   using: 'composite'
@@ -8,7 +13,7 @@ runs:
       with:
         args: --reporter json > swiftlint.log
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
   
     - uses: actions/upload-artifact@v3
       with:
