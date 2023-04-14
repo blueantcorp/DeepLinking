@@ -30,20 +30,18 @@ jobs:
       with:
         bundler-cache: true
 
+
     - name: Run Danger
       run: bundle exec danger
       env:
         DANGER_ID: 'danger-CI'
         
         # This is the token that is used to authenticate with GitHub.
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
         # This is the token that is used to authenticate with Danger.
-        DANGER_GITHUB_HOST: ${{ secrets.DANGER_GITHUB_HOST }}
-        DANGER_OCTOKIT_VERIFY_SSL: ${{ secrets.DANGER_OCTOKIT_VERIFY_SSL }}
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-        DANGER_GITHUB_BEARER_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-        DANGER_GITHUB_API_BASE_URL: ${{ secrets.DANGER_GITHUB_API_BASE_URL }}
+        DANGER_GITHUB_BEARER_TOKEN: ${{ github.danger_bearer_token }}
+        DANGER_GITHUB_API_BASE_URL: ${{ github.github_api_base_url }}
 
         SWIFTLINT_REPORT_FILE: ${{ github.workspace }}/swiftlint.log
 
@@ -64,18 +62,3 @@ jobs:
         SWIFTLINT_ENABLED: true
         SWIFTLINT_PATH: ./.swiftlint.yml
         SWIFTLINT_EXECUTABLE: bundle exec swiftlint
-
-        # danger:
-        #   if: ${{ false }}
-        #   runs-on: ubuntu-latest
-        #   steps:
-        #   - uses: actions/checkout@v3
-      
-        #   - name: Build Package
-        #     run: swift build -v
-      
-        #   - name: Test Package
-        #     run: |
-        #       swift test \
-        #         --enable-test-discovery \
-        #         --enable-code-coverage
