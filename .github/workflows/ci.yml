@@ -2,28 +2,14 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
+  validate:
+    name: validate
+    uses: ./.github/workflows/validate.yml
 
-  danger:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
-        with:
-          bundler-cache: true
-      - uses: MeilCli/danger-action@v5
-        with:
-          danger_id: 'danger-pr'
-          danger_file: 'Dangerfile'
+          
 
   build:
-    needs: [danger, lint]
+    needs: [validate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -66,10 +52,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-
-
-
 
   analyze:
     needs: [publish]
@@ -120,3 +102,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+
