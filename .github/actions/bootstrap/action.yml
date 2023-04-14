@@ -17,6 +17,9 @@ runs:
     uses: mikehardy/buildcache-action@v2
     continue-on-error: true
 
+  - name: Install Swift tools
+    run: echo ${{ github.workspace }}
+
   # Install Ruby gems
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
