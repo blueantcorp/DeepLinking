@@ -35,25 +35,34 @@ jobs:
     - name: Run Danger
       run: bundle exec danger
       env:
-        # This is the
-        danger_id: 'Build'
+        DANGER_ID: 'Build'
         
         # This is the token that is used to authenticate with GitHub.
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         # This is the token that is used to authenticate with Danger.
-        danger_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-        danger_github_api_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-        danger_github_bearer_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        DANGER_GITHUB_HOST: ${{ secrets.DANGER_GITHUB_HOST }}
+        DANGER_OCTOKIT_VERIFY_SSL: ${{ secrets.DANGER_OCTOKIT_VERIFY_SSL }}
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        DANGER_GITHUB_BEARER_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        DANGER_GITHUB_API_BASE_URL: ${{ secrets.DANGER_GITHUB_API_BASE_URL }}
+
+        SWIFTLINT_REPORT_FILE: ${{ github.workspace }}/swiftlint.log
+
+        SWIFTLINT_REPORTER: json
+        SWIFTLINT_REPORTER_OUTPUT: swiftlint.log
+        SWIFTLINT_REPORTER_OUTPUT_DIR: ${{ github.workspace }}
+        SWIFTLINT_REPORTER_OUTPUT_FILE: swiftlint.log
+        SWIFTLINT_REPORTER_OUTPUT_PATH: ${{ github.workspace }}/swiftlint.log
+        SWIFTLINT_REPORTER_OUTPUT_PATHS: ${{ github.workspace }}/swiftlint.log
+
+        SWIFTLINT_USE_BUNDLER: true
+        SWIFTLINT_USE_BUNDLER_EXEC: true
         
-        # SwiftLint settings
-        swiftlint_enabled: true
-        swiftlint_inline_mode: true
-        swiftlint_fail_on_error: true
-        swiftlint_ignore_file: .swiftlint.yml
-        swiftlint_reporter: json
-        swiftlint_report_file: swiftlint.log
-        swiftlint_use_bundler: true
-        swiftlint_use_bundler_exec: true
-        swiftlint_force_bundle_exec: true
-  
+        SWIFTLINT_FORCE_BUNDLE_EXEC: true
+        SWIFTLINT_IGNORE_FILE: .swiftlint.yml
+        SWIFTLINT_FAIL_ON_ERROR: true
+        SWIFTLINT_INLINE_MODE: true
+        SWIFTLINT_ENABLED: true
+        SWIFTLINT_PATH: ./.swiftlint.yml
+        SWIFTLINT_EXECUTABLE: bundle exec swiftlint
