@@ -5,7 +5,7 @@ jobs:
   swiftlint:
     runs-on: ubuntu-latest
     continue-on-error: false
-    skip-checks: true
+
     steps:
     - uses: actions/checkout@v3
     - uses: norio-nomura/action-swiftlint@3.2.1
