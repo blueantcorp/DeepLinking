@@ -29,3 +29,4 @@ runs:
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
+    run: bundle install --jobs 4 --retry 3

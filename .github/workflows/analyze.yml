@@ -7,12 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-    - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1.138.0
-      with:
-        bundler-cache: true
-        ruby-version: 2.7.4
-    - run: bundle exec slather
+    - uses: ./.github/actions/boootstrap
+    - run: |
+        # bundle install
+        bundle exec slather
           
   danger:
     needs: [slather]
