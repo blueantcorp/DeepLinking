@@ -20,28 +20,12 @@ jobs:
           ./.swiftlint.yml
           ./swiftlint.log
 
-  build:
+  build-test:
     needs: [swiftlint]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build Package
-      run: swift build -v
-
-  test:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Test Package
-      run: |
-        swift test \
-          --enable-test-discovery \
-          --enable-code-coverage
+    uses: ./.github/workflows/build-test.yml
 
   slather:
-    if: ${{ false }}
-    needs: [test]
+    needs: [build-test]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -51,7 +35,7 @@ jobs:
     - run: bundle exec slather
           
   danger:
-    needs: [test]
+    needs: [build-test]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -98,7 +82,7 @@ jobs:
 
   archive:
     if: ${{ false }}
-    needs: [test]
+    needs: [build-test]
     name: Archive
     runs-on: ubuntu-latest
     steps:
@@ -111,14 +95,13 @@ jobs:
     - name: Provision
       run: echo "Provisioning..."
   
+  documentation:
+    needs: [swiftlint]
+    uses: ./.github/workflows/documentation.yml
+  
   publish:
-    if: ${{ false }}
+    needs: [documentation]
     runs-on: ubuntu-latest
     steps:
     - name: Publish
       run: echo "Publishing..."
-  
-  documentation:
-    needs: [swiftlint]
-    name: Generate Documentation
-    uses: ./.github/workflows/documentation.yml

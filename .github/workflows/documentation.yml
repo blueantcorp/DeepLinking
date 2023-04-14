@@ -4,7 +4,7 @@ on:
 
 jobs:
   format:
-    runs-on: composite
+    runs-on: ubuntu-latest
     steps:
     - name: Format source code
       uses: mtgto/swift-format-action@main
@@ -15,7 +15,8 @@ jobs:
         max_warnings: -1
 
   generate:
-    runs-on: composite
+    needs: format
+    runs-on: ubuntu-latest
     steps:
     - name: Generate Docs
       run: echo "Generating Docs..."
