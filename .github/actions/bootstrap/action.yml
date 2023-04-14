@@ -1,24 +1,10 @@
 name: bootstrap
 description: bootstrap project descr
 
-inputs:
-  ruby-version:
-    description: Ruby version
-    required: true
-    default: '3.0.0'
-
 runs:
   using: composite
   steps:
-    defaults:
-      run:
-        # Default working directory for all steps 
-        working-directory: ${{ github.workspace }}
-  
-  # Checkout the repository
-  - uses: actions/checkout@v3
 
-  # Cache SPM dependencies
   - uses: actions/cache@v3
     with:
       path: .build
@@ -36,7 +22,8 @@ runs:
     uses: ruby/setup-ruby@v1
     with:
       bundler-cache: true
-      working-directory: ${{ github.workspace }} 
+      working-directory: ${{ github.workspace }}
+      ruby-version: ${{ inputs.ruby-version }}
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
