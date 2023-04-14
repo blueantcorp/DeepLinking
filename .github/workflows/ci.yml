@@ -21,19 +21,19 @@ jobs:
           ./swiftlint.log
 
   build-test:
-    needs: [swiftlint]
+    needs: swiftlint
     uses: ./.github/workflows/build-test.yml
 
   analyze:
-    needs: [build-test]
+    needs: build-test
     uses: ./.github/workflows/analyze.yml
 
   build-product:
-    needs: [analyze]
+    needs: analyze
     uses: ./.github/workflows/build-product.yml
   
   documentation:
-    needs: [build-test]
+    needs: analyze
     uses: ./.github/workflows/documentation.yml
   
   publish:
