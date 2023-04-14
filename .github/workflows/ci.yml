@@ -67,7 +67,7 @@ jobs:
       uses: codecov/codecov-action@v3
 
   sonarcloud:
-    needs: [codecov, danger, slather]
+    needs: [danger, slather]
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
