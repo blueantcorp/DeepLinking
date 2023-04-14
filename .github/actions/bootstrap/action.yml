@@ -19,6 +19,7 @@ runs:
 
   - name: Install Swift tools
     run: echo ${{ github.workspace }}
+    shell: bash
 
   # Install Ruby gems
   - name: Setup Ruby (bundle)
