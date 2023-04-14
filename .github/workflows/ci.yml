@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   swiftlint:
-    runs-on: ubuntu-latest
+    uses: ./.github/actions/bootstrap
     steps:
     - uses: actions/checkout@v3
     - uses: norio-nomura/action-swiftlint@3.2.1
@@ -11,7 +11,7 @@ jobs:
         args: --lenient --reporter json > swiftlint.log
         github_token: ${{ secrets.GITHUB_TOKEN }}
   
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: swiftlint
         path: |
