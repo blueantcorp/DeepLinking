@@ -3,20 +3,21 @@ on: [push, pull_request]
 
 jobs:
   swiftlint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: norio-nomura/action-swiftlint@3.2.1
-      with:
-        args: --lenient --reporter json > swiftlint.log
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    uses: ./.github/workflows/validate.yml
+
+    # steps:
+    # - uses: actions/checkout@v3
+    # - uses: norio-nomura/action-swiftlint@3.2.1
+    #   with:
+    #     args: --lenient --reporter json > swiftlint.log
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
   
-    - uses: actions/upload-artifact@v3
-      with:
-        name: swiftlint
-        path: |
-          ./.swiftlint.yml
-          ./swiftlint.log
+    # - uses: actions/upload-artifact@v3
+    #   with:
+    #     name: swiftlint
+    #     path: |
+    #       ./.swiftlint.yml
+    #       ./swiftlint.log
 
   danger:
     if: ${{ false }}
@@ -32,17 +33,6 @@ jobs:
         swift test \
           --enable-test-discovery \
           --enable-code-coverage
-  
-    - name: Danger
-      uses: danger/danger-js@11.2.6
-      with:
-        args: | 
-            --id ci \
-            --verbose \
-            --danger_id ci \
-            --github_api_token ${{ secrets.GITHUB_TOKEN }} \
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
 
   build:
