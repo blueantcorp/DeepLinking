@@ -39,3 +39,4 @@ jobs:
         DANGER_SWIFTLINT_REPORTER: json
         DANGER_SWIFTLINT_REPORT_FILE: swiftlint.log
         DANGER_SWIFTLINT_CONFIG_FILE: .swiftlint.yml
+
