@@ -35,6 +35,10 @@ runs:
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
     with:
-      ruby-version: 2.6
       bundler-cache: true
       working-directory: ${{ github.workspace }} 
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
+      BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
