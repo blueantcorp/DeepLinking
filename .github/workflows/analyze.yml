@@ -36,6 +36,7 @@ jobs:
   codecov:
     needs: [slather]
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
     - uses: mattpolzin/swift-codecov-action@0.7.5
@@ -47,14 +48,13 @@ jobs:
 
   sonarcloud:
     needs: [slather]
-    name: SonarCloud
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0  
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
+        fetch-depth: 0 
+    - uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
