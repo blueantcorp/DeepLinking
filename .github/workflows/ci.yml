@@ -113,24 +113,11 @@ jobs:
   
   publish:
     if: ${{ false }}
-    name: Publish on GitHub
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Publish
+      run: echo "Publishing..."
   
   documentation:
     needs: [swiftlint]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Format source code
-      uses: mtgto/swift-format-action@main
-      with:
-        configuration_file: .swift-format
-        all_files: false
-        auto_correct: true
-        max_warnings: -1
-
-    - name: Generate Docs
-      run: echo "Generating Docs..."
+    uses: ./.github/workflows/documentation.yml
