@@ -1,4 +1,4 @@
-name: Validate
+name: Run code validation
 on:
     workflow_call:
 
@@ -36,7 +36,7 @@ jobs:
       run: bundle exec danger
       env:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        danger_id: ${{ github.event.pull_request.head.sha }}
+        danger_id: 'Build'
         swiftlint_enabled: true
         swiftlint_inline_mode: true
         swiftlint_fail_on_error: true
