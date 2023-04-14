@@ -2,11 +2,11 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-
   swiftlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/validate.yml
+    - uses: actions/checkout@v3
+    - uses: ./.github/workflows/validate.yml
 
     # steps:
     # - uses: actions/checkout@v3
