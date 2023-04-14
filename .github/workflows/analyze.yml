@@ -11,25 +11,8 @@ jobs:
     - uses: ./.github/actions/bootstrap/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: bundle install && bundle exec slather
-      env:
-        SLATER_COVERAGE_SERVICE: 'github-actions'
-        SLATER_GITHUB_ACTIONS: 'true'
-        SLATER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SLATER_GITHUB_WORKFLOW: ${{ github.workflow }}
-        SLATER_GITHUB_RUN_ID: ${{ github.run_id }}
-        SLATER_GITHUB_RUN_NUMBER: ${{ github.run_number }}
-        SLATER_GITHUB_REF: ${{ github.ref }}
-        SLATER_GITHUB_SHA: ${{ github.sha }}
-        SLATER_GITHUB_REPOSITORY: ${{ github.repository }}
-        SLATER_GITHUB_ACTOR: ${{ github.actor }}
-        SLATER_GITHUB_EVENT_NAME: ${{ github.event_name }}
-        SLATER_GITHUB_WORKSPACE: ${{ github.workspace }}
-        SLATER_INPUT_COVERAGE_SERVICE: 'github-actions'
-        SLATER_INPUT_GITHUB_ACTIONS: 'true'
-        SLATER_INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SLATER_INPUT_GITHUB_WORKFLOW: ${{ github.workflow }}
-        iconv: 'true'
+    - name: Install Slather
+      run: bundle exec slather
 
   danger:
     needs: slather
