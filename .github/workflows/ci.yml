@@ -6,11 +6,7 @@ jobs:
   swiftlint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/validate-swiftlint
-      with:
-        args: --lenient --reporter json > swiftlint.log
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: ./.github/actions/validate/
 
     # steps:
     # - uses: actions/checkout@v3
