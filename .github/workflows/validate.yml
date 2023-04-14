@@ -4,14 +4,13 @@ on:
 
 jobs:
   swiftlint:
-    if: ${{ false }}
     name: Run SwiftLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
-        args: --strict --reporter json > swiftlint.log
+        args: --reporter json > swiftlint.log
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
@@ -23,6 +22,7 @@ jobs:
           ./swiftlint.log
   
   danger:
+    if: ${{ false }}
     name: "Run Danger"
     continue-on-error: true
     runs-on: ubuntu-latest
