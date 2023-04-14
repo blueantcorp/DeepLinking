@@ -67,7 +67,7 @@ jobs:
       uses: codecov/codecov-action@v3
 
   sonarcloud:
-    needs: [danger, slather]
+    needs: [slather]
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
@@ -81,7 +81,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-product:
-    needs: [codecov, sonarcloud]
+    needs: [codecov, sonarcloud, danger]
     uses: ./.github/workflows/build-product.yml
   
   documentation:
