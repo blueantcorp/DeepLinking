@@ -1,4 +1,4 @@
-name: Run code validation
+name: Validate
 on:
   workflow_call:
 
