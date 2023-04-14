@@ -15,6 +15,7 @@ jobs:
         max_warnings: -1
 
   generate:
+    needs: format
     runs-on: ubuntu-latest
     steps:
     - name: Generate Docs
