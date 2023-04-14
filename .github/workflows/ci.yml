@@ -22,6 +22,7 @@ jobs:
 
   build-test:
     needs: swiftlint
+    
     uses: ./.github/workflows/build-test.yml
 
   analyze:
