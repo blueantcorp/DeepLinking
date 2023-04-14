@@ -85,7 +85,7 @@ jobs:
     uses: ./.github/workflows/build-product.yml
   
   documentation:
-    needs: [swiftlint]
+    needs: [build-test]
     uses: ./.github/workflows/documentation.yml
   
   publish:
