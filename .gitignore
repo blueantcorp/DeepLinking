@@ -93,4 +93,4 @@ contents.xcworkspacedata
 
 #
 .vendor
-Gemfile
+vendor
