@@ -3,23 +3,9 @@ on: [push, pull_request]
 
 jobs:
   validate:
-      name: validate
-      uses: ./.github/workflows/validate.yml
+    name: validate
+    uses: ./.github/workflows/validate.yml
 
-  danger:
-    if: ${{ false }}
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Build Package
-      run: swift build -v
-
-    - name: Test Package
-      run: |
-        swift test \
-          --enable-test-discovery \
-          --enable-code-coverage
           
 
   build:
