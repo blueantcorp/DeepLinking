@@ -10,21 +10,6 @@ jobs:
         uses: ./.github/workflows/validate.yml
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        
-
-    # steps:
-    # - uses: actions/checkout@v3
-    # - uses: norio-nomura/action-swiftlint@3.2.1
-    #   with:
-    #     args: --lenient --reporter json > swiftlint.log
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-  
-    # - uses: actions/upload-artifact@v3
-    #   with:
-    #     name: swiftlint
-    #     path: |
-    #       ./.swiftlint.yml
-    #       ./swiftlint.log
 
   danger:
     if: ${{ false }}
