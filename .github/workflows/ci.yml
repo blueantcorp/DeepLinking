@@ -6,8 +6,6 @@ jobs:
     name: validate
     uses: ./.github/workflows/validate.yml
 
-          
-
   build:
     needs: [validate]
     runs-on: ubuntu-latest
@@ -27,80 +25,100 @@ jobs:
             --enable-test-discovery \
             --enable-code-coverage
   
-  codecov:
+  danger:
     needs: [test]
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
-      - uses: actions/checkout@v3
-      - uses: mattpolzin/swift-codecov-action@0.7.5
-        with:
-          MINIMUM_COVERAGE: 90
-          INCLUDE_TESTS: "true"
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-
-  sonarcloud:
-    needs: [test]
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  analyze:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+  
+    - name: Run Danger
+      run: bundle exec danger
+      env:
+        DANGER_ID: 'danger-ci'
+        GITHUB_TOKEN: ${{ github.token }}
+        DANGER_GITHUB_API_TOKEN: ${{ github.token }}
+        DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
 
   slather:
     if: ${{ false }}
     needs: [analyze]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
-        with:
-          ruby-version: 3.0
-          bundler-cache: true
-      - run: bundle exec slather
+    - uses: actions/checkout@v3
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1.138.0
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - run: bundle exec slather
+  
+  codecov:
+    needs: [danger]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: mattpolzin/swift-codecov-action@0.7.5
+      with:
+        MINIMUM_COVERAGE: 90
+        INCLUDE_TESTS: "true"
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+
+  sonarcloud:
+    needs: [danger]
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  analyze:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
 
   format:
-    needs: [publish]
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: mtgto/swift-format-action@main
-        with:
-          configuration_file: .swift-format
-          all_files: false
-          auto_correct: true
-          max_warnings: -1
+    - uses: actions/checkout@v3
+    - uses: mtgto/swift-format-action@main
+      with:
+        configuration_file: .swift-format
+        all_files: false
+        auto_correct: true
+        max_warnings: -1
 
   docs:
-    needs: [format]
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
   release:
     needs: [publish]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
   publish:
     if: ${{ false }}
     name: Publish on GitHub
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
 
