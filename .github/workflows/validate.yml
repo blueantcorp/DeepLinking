@@ -39,22 +39,3 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
         DANGER_GITHUB_API_TOKEN: ${{ github.token }}
         DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
-
-        # SWIFTLINT_REPORT_FILE: ${{ github.workspace }}/swiftlint.log
-        # SWIFTLINT_REPORTER: json
-        # SWIFTLINT_REPORTER_OUTPUT: swiftlint.log
-        # SWIFTLINT_REPORTER_OUTPUT_DIR: ${{ github.workspace }}
-        # SWIFTLINT_REPORTER_OUTPUT_FILE: swiftlint.log
-        # SWIFTLINT_REPORTER_OUTPUT_PATH: ${{ github.workspace }}/swiftlint.log
-        # SWIFTLINT_REPORTER_OUTPUT_PATHS: ${{ github.workspace }}/swiftlint.log
-
-        # SwiftLint
-        SWIFTLINT_USE_BUNDLER: true
-        SWIFTLINT_USE_BUNDLER_EXEC: true
-        SWIFTLINT_FORCE_BUNDLE_EXEC: true
-        SWIFTLINT_IGNORE_FILE: .swiftlint.yml
-        SWIFTLINT_FAIL_ON_ERROR: true
-        SWIFTLINT_INLINE_MODE: true
-        SWIFTLINT_ENABLED: true
-        SWIFTLINT_PATH: ./.swiftlint.yml
-        SWIFTLINT_EXECUTABLE: bundle exec swiftlint
