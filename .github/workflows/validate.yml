@@ -1,11 +1,16 @@
 name: Run code validation
 on:
   workflow_call:
-
+    inputs:
+      runner:
+        description: 'Runner'
+        required: false
+        default: 'ubuntu-latest'
+        type: string
 jobs:
   swiftlint:
     if: ${{ true }}
-    runs-on: composite
+    runs-on: runner
     continue-on-error: false
     steps:
     - uses: actions/checkout@v3
