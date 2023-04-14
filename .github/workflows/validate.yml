@@ -8,6 +8,7 @@ jobs:
     runs-on: composite
     continue-on-error: false
     steps:
+    - uses: actions/checkout@v3
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --reporter json > swiftlint.log
