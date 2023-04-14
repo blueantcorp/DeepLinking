@@ -4,7 +4,6 @@ on:
 
 jobs:
   swiftlint:
-    if: ${{ true }}
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -23,7 +22,6 @@ jobs:
           ./swiftlint.log
   
   danger:
-    if: ${{ true }}
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -56,9 +54,9 @@ jobs:
         SWIFTLINT_REPORTER_OUTPUT_PATH: ${{ github.workspace }}/swiftlint.log
         SWIFTLINT_REPORTER_OUTPUT_PATHS: ${{ github.workspace }}/swiftlint.log
 
+        # SwiftLint
         SWIFTLINT_USE_BUNDLER: true
         SWIFTLINT_USE_BUNDLER_EXEC: true
-        
         SWIFTLINT_FORCE_BUNDLE_EXEC: true
         SWIFTLINT_IGNORE_FILE: .swiftlint.yml
         SWIFTLINT_FAIL_ON_ERROR: true
@@ -66,3 +64,18 @@ jobs:
         SWIFTLINT_ENABLED: true
         SWIFTLINT_PATH: ./.swiftlint.yml
         SWIFTLINT_EXECUTABLE: bundle exec swiftlint
+
+        # danger:
+        #   if: ${{ false }}
+        #   runs-on: ubuntu-latest
+        #   steps:
+        #   - uses: actions/checkout@v3
+      
+        #   - name: Build Package
+        #     run: swift build -v
+      
+        #   - name: Test Package
+        #     run: |
+        #       swift test \
+        #         --enable-test-discovery \
+        #         --enable-code-coverage
