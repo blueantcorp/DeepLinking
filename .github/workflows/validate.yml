@@ -26,11 +26,12 @@ jobs:
     continue-on-error: false
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
-
-
+  
     - name: Run Danger
       run: bundle exec danger
       env:
