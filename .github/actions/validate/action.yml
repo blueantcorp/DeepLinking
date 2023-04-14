@@ -5,8 +5,16 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
-    - name: GitHub Action for Danger
-      uses: MeilCli/danger-action@v5
+    - uses: norio-nomura/action-swiftlint@3.2.1
       with:
-        danger_id: danger-push
-        danger_file: Dangerfile
+        args: --reporter json > swiftlint.log
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+    - uses: actions/upload-artifact@v3
+      with:
+        name: swiftlint
+        path: |
+          ./.swiftlint.yml
+          ./swiftlint.log
