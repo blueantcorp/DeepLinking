@@ -36,10 +36,14 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/checkout@v3
+
+    # Install Codecov
     - uses: mattpolzin/swift-codecov-action@0.7.5
       with:
         MINIMUM_COVERAGE: 90
         INCLUDE_TESTS: "true"
+
+    # Upload coverage to Codecov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
 
