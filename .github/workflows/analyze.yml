@@ -45,13 +45,11 @@ jobs:
       uses: codecov/codecov-action@v3
 
   sonarcloud:
-    needs: [slather]
+    needs: slather
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: SonarCloud Scan
       run: echo ${{ secrets.SONAR_TOKEN }}
 
