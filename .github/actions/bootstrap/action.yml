@@ -21,14 +21,11 @@ runs:
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
     with:
-      bundler-cache: true
       working-directory: ${{ github.workspace }}
       ruby-version: ${{ inputs.ruby-version }}
+      bundler-cache: true
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
-
-  - name: Install Ruby gems
-    run: bundle install --jobs 4 --retry 3
