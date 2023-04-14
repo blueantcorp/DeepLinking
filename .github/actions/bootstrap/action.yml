@@ -31,6 +31,10 @@ runs:
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
 
+    # Install Ruby tools
+    - name: Install dependencies
+      run: bundle install --jobs 4 --retry 3
+
     # Install Swift tools
     - name: Generate Xcode project
       uses: xavierLowmiller/xcodegen-action@1.1.2
