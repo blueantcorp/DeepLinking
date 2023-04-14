@@ -3,9 +3,8 @@ on: [push, pull_request]
 
 jobs:
   swiftlint:
-    uses: ./.github/actions/bootstrap
     steps:
-    - uses: actions/checkout@v3
+    - uses: .github/actions/bootstrap
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --lenient --reporter json > swiftlint.log
