@@ -17,10 +17,9 @@ jobs:
             --enable-code-coverage
     
       - name: Danger
-        uses: danger/dange
+        uses: danger/danger-js@9.1.6
         with:
           args: | 
-              --dangerfile artsy/peril-settings/main/org/allPRs.ts \
               --id ci \
               --verbose \
               --danger_id ci \
