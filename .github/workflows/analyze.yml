@@ -8,7 +8,7 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-    - uses: ./.github/actions/boootstrap@main
+    - uses: ./.github/actions/boootstrap@v1
       with:
         branch_name: ${{ github.event.inputs.branch_name }} }} 
     - run: bundle exec slather
