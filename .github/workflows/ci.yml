@@ -98,7 +98,7 @@ jobs:
 
   archive:
     if: ${{ false }}
-    needs: [build]
+    needs: [test]
     name: Archive
     runs-on: ubuntu-latest
     steps:
@@ -118,21 +118,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
   
-  format:
+  documentation:
     needs: [swiftlint]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: mtgto/swift-format-action@main
+    
+    - name: Format source code
+      uses: mtgto/swift-format-action@main
       with:
         configuration_file: .swift-format
         all_files: false
         auto_correct: true
         max_warnings: -1
 
-  docs:
-    needs: [format]
-    name: Generate Docs
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo "Generating Docs..."
+    - name: Generate Docs
+      run: echo "Generating Docs..."
