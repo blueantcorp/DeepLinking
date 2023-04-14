@@ -1,11 +1,7 @@
 name: Validate
 on:
   workflow_call:
-    inputs:
-      github_token:
-        description: 'GitHub token'
-        required: true
-        type: string
+
 jobs:
   swiftlint:
     if: ${{ true }}
@@ -17,7 +13,7 @@ jobs:
       with:
         args: --reporter json > swiftlint.log
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
   
     - uses: actions/upload-artifact@v3
       with:
