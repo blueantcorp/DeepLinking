@@ -22,16 +22,15 @@ jobs:
 
   build-test:
     needs: swiftlint
-    
     uses: ./.github/workflows/build-test.yml
-
-  analyze:
-    needs: build-test
-    uses: ./.github/workflows/analyze.yml
 
   build-product:
     needs: build-test
     uses: ./.github/workflows/build-product.yml
+
+  analyze:
+    needs: build-test
+    uses: ./.github/workflows/analyze.yml
   
   documentation:
     needs: analyze
