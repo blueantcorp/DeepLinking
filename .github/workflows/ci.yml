@@ -6,14 +6,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+
+      - name: Build Package
+        run: swift build -v
+
+      - name: Test Package
+        run: |
+          swift test \
+            --enable-test-discovery \
+            --enable-code-coverage
+    
       - name: Danger
-        uses: 417-72KI/danger-swiftlint@v5.7
-        
+        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.15.0
+        with:
+          args: | 
+              --dangerfile artsy/peril-settings/org/allPRs.ts \
+              --id ci \
+              --verbose \
+              --danger_id ci \
+              --github_api_token ${{ secrets.GITHUB_TOKEN }} \
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
 
   build:
     needs: [danger]
