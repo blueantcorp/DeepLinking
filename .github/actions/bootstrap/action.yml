@@ -17,10 +17,6 @@ runs:
     uses: mikehardy/buildcache-action@v2
     continue-on-error: true
 
-  - name: Install Swift tools
-    run: ls -l
-    shell: bash
-
   # Install Ruby gems
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
@@ -29,7 +25,14 @@ runs:
       working-directory: ${{ github.workspace }}
       ruby-version: ${{ inputs.ruby-version }}
     env:
+      BUNDLE_VERSION: ${{ inputs.bundler-version }}
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
+
+    # Install Swift tools
+    - name: Generate Xcode project
+      uses: xavierLowmiller/xcodegen-action@1.1.2
+      with:
+        spec: .xcodegen.yml
