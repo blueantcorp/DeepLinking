@@ -97,12 +97,22 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  analyze:
+  archive:
     if: ${{ false }}
+    needs: [build]
+    runs-on: ubuntu-latest
+
+  provision:
+    needs: [archive]
+    runs-on: ubuntu-latest
+  
+  publish:
+    if: ${{ false }}
+    name: Publish on GitHub
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
+  
   format:
     if: ${{ false }}
     runs-on: ubuntu-latest
@@ -120,18 +130,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-  release:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-  publish:
-    if: ${{ false }}
-    name: Publish on GitHub
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-
