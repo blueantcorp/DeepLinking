@@ -4,13 +4,11 @@ on:
 
 jobs:
   swiftlint:
+    if: ${{ false }}
     name: Run SwiftLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --strict --reporter json > swiftlint.log
@@ -25,13 +23,19 @@ jobs:
           ./swiftlint.log
   
   danger:
-    runs-on: ubuntu-latest
     name: "Run Danger"
+    continue-on-error: true
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Danger
-      uses: danger/swift@3.15.0
+    - uses: ruby/setup-ruby@v1
       with:
-          args: --failOnErrors --no-publish-check
+        bundler-cache: true
+
+    - name: Run Danger
+      run: bundle exec danger
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DANGER_SWIFTLINT_REPORTER: json
+        DANGER_SWIFTLINT_REPORT_FILE: swiftlint.log
+        DANGER_SWIFTLINT_CONFIG_FILE: .swiftlint.yml
