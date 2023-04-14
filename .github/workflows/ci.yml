@@ -81,7 +81,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-product:
-    needs: [sonarcloud]
+    needs: [codecov, sonarcloud]
     uses: ./.github/workflows/build-product.yml
   
   documentation:
@@ -89,7 +89,7 @@ jobs:
     uses: ./.github/workflows/documentation.yml
   
   publish:
-    needs: [documentation]
+    needs: [documentation, build-product]
     runs-on: ubuntu-latest
     steps:
     - name: Publish
