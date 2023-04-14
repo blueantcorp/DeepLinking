@@ -120,4 +120,5 @@ jobs:
   
   documentation:
     needs: [swiftlint]
+    name: Generate Documentation
     uses: ./.github/workflows/documentation.yml
