@@ -3,6 +3,16 @@ on:
   workflow_call:
 
 jobs:
+  analize-code:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        approvers: trstringer,acdunnigan
+    - name: Deploy to production
+      run: echo deploying
+
   slather:
     runs-on: ubuntu-latest
     continue-on-error: true
