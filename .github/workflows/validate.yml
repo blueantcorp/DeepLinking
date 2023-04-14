@@ -27,26 +27,23 @@ jobs:
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
-      - uses: danger/swift@master
-        with:
-          args: "--dangerfile artsy/peril-settings/org/allPRs.ts"
-    # - uses: actions/checkout@v3
-    # - uses: ruby/setup-ruby@v1
-    #   with:
-    #     bundler-cache: true
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
 
-    # - name: Run Danger
-    #   run: bundle exec danger
-    #   env:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     danger_id: ${{ github.event.pull_request.head.sha }}
-    #     swiftlint_enabled: true
-    #     swiftlint_inline_mode: true
-    #     swiftlint_fail_on_error: true
-    #     swiftlint_ignore_file: .swiftlint.yml
-    #     swiftlint_reporter: json
-    #     swiftlint_report_file: swiftlint.log
-    #     swiftlint_use_bundler: true
-    #     swiftlint_use_bundler_exec: true
-    #     swiftlint_force_bundle_exec: true
-        
+    - name: Run Danger
+      run: bundle exec danger
+      env:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        danger_id: ${{ github.event.pull_request.head.sha }}
+        swiftlint_enabled: true
+        swiftlint_inline_mode: true
+        swiftlint_fail_on_error: true
+        swiftlint_ignore_file: .swiftlint.yml
+        swiftlint_reporter: json
+        swiftlint_report_file: swiftlint.log
+        swiftlint_use_bundler: true
+        swiftlint_use_bundler_exec: true
+        swiftlint_force_bundle_exec: true
+  
