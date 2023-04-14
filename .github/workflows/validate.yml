@@ -35,49 +35,15 @@ jobs:
     - name: Run Danger
       run: bundle exec danger
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DANGER_EXECUTE_CI: true
-
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DANGER_GITHUB_HOST: github.com
-        DANGER_GITHUB_API_HOST: api.github.com
-        DANGER_GITHUB_PR_REPO_SLUG: ${{ github.repository }}
-        DANGER_GITHUB_PR_BASE_BRANCH: ${{ github.base_ref }}
-        DANGER_GITHUB_PR_BASE_BRANCH_SHA: ${{ github.event.pull_request.base.sha }}
-        DANGER_GITHUB_PR_HEAD_BRANCH: ${{ github.head_ref }}
-        DANGER_GITHUB_PR_HEAD_BRANCH_SHA: ${{ github.event.pull_request.head.sha }}
-        DANGER_GITHUB_PR_NUMBER: ${{ github.event.number }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        danger_id: ${{ github.event.pull_request.head.sha }}
+        swiftlint_enabled: true
+        swiftlint_inline_mode: true
+        swiftlint_fail_on_error: true
+        swiftlint_ignore_file: .swiftlint.yml
+        swiftlint_reporter: json
+        swiftlint_report_file: swiftlint.log
+        swiftlint_use_bundler: true
+        swiftlint_use_bundler_exec: true
+        swiftlint_force_bundle_exec: true
         
-        DANGER_GITHUB_PR_AUTHOR: ${{ github.event.pull_request.user.login }}
-        DANGER_GITHUB_PR_AUTHOR_URL: ${{ github.event.pull_request.user.html_url }}
-        DANGER_GITHUB_PR_AUTHOR_AVATAR: ${{ github.event.pull_request.user.avatar_url }}
-        
-        DANGER_GITHUB_PR_TITLE: ${{ github.event.pull_request.title }}
-        DANGER_GITHUB_PR_BODY: ${{ github.event.pull_request.body }}
-        DANGER_GITHUB_PR_URL: ${{ github.event.pull_request.html_url }}
-        DANGER_GITHUB_PR_DIFF_URL: ${{ github.event.pull_request.diff_url }}
-        DANGER_GITHUB_PR_MERGEABLE: ${{ github.event.pull_request.mergeable }}
-        DANGER_GITHUB_PR_MERGEABLE_STATE: ${{ github.event.pull_request.mergeable_state }}
-        
-        DANGER_GITHUB_PR_MERGED: ${{ github.event.pull_request.merged }}
-        DANGER_GITHUB_PR_MERGED_AT: ${{ github.event.pull_request.merged_at }}
-        DANGER_GITHUB_PR_MERGED_BY: ${{ github.event.pull_request.merged_by.login }}
-        DANGER_GITHUB_PR_MERGED_BY_URL: ${{ github.event.pull_request.merged_by.html_url }}
-        DANGER_GITHUB_PR_MERGED_BY_AVATAR: ${{ github.event.pull_request.merged_by.avatar_url }}
-        DANGER_GITHUB_PR_REVIEWERS: ${{ github.event.pull_request.requested_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_REQUESTED: ${{ github.event.pull_request.requested_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_REQUESTED_TEAM: ${{ github.event.pull_request.requested_teams }}
-        DANGER_GITHUB_PR_REVIEWER_APPROVED: ${{ github.event.pull_request.approved_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_CHANGES_REQUESTED: ${{ github.event.pull_request.requested_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_DISMISSED: ${{ github.event.pull_request.requested_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_COMMENTED: ${{ github.event.pull_request.requested_reviewers }}
-        DANGER_GITHUB_PR_REVIEWER_PENDING: ${{ github.event.pull_request.requested_reviewers }}
-
-        DANGER_SWIFTLINT_REPORTER: json
-        DANGER_SWIFTLINT_REPORT_FILE: swiftlint.log
-        DANGER_SWIFTLINT_CONFIG_FILE: .swiftlint.yml
-        DANGER_SWIFTLINT_USE_BUNDLER: true
-        DANGER_SWIFTLINT_USE_BUNDLER_EXEC: true
-
-        danger_id: ${{ github.event.pull_request.head.sha }}        
-
