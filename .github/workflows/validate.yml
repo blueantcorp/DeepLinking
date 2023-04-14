@@ -3,13 +3,11 @@ on:
   workflow_call:
 
 jobs:
-  bootstarap:
-    uses: ./.github/actions/bootstrap
-
   swiftlint:
-    runs-on: ubuntu-latest
+    if: ${{ true }}
+    runs-on: composite
+    continue-on-error: false
     steps:
-    - uses: actions/checkout@v3
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --reporter json > swiftlint.log
@@ -24,10 +22,9 @@ jobs:
           ./swiftlint.log
   
   danger:
-    if: ${{ false }}
-    name: "Run Danger"
-    continue-on-error: true
+    if: ${{ true }}
     runs-on: ubuntu-latest
+    continue-on-error: false
     steps:
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
