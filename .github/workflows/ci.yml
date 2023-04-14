@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/analyze.yml
 
   build-product:
-    needs: analyze
+    needs: build-test
     uses: ./.github/workflows/build-product.yml
   
   documentation:
