@@ -34,7 +34,7 @@ jobs:
 
   build-test:
     # needs: swiftlint
-    uses: ${{ WORKFLOW_PATH }}/build-test.yml
+    uses: ${{ env.WORKFLOW_PATH }}/build-test.yml@develop
 
   build-product:
     needs: build-test
