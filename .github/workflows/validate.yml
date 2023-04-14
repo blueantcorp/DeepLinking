@@ -1,10 +1,12 @@
 name: Run code validation
 on:
-    workflow_call:
+  workflow_call:
 
 jobs:
+  bootstarap:
+    uses: ./.github/actions/bootstrap
+
   swiftlint:
-    name: Run SwiftLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -14,7 +16,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: swiftlint
         path: |
