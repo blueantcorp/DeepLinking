@@ -35,9 +35,18 @@ jobs:
     - name: Run Danger
       run: bundle exec danger
       env:
+        # This is the
         danger_id: 'Build'
+        
+        # This is the token that is used to authenticate with GitHub.
         github_token: ${{ secrets.GITHUB_TOKEN }}
+
+        # This is the token that is used to authenticate with Danger.
         danger_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        danger_github_api_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        danger_github_bearer_token: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        
+        # SwiftLint settings
         swiftlint_enabled: true
         swiftlint_inline_mode: true
         swiftlint_fail_on_error: true
