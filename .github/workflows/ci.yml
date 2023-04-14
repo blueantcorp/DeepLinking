@@ -17,7 +17,7 @@ jobs:
             --enable-code-coverage
     
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.15.0
+        uses: danger/danger-js@9.1.6
         with:
           args: | 
               --dangerfile artsy/peril-settings/org/allPRs.ts \
