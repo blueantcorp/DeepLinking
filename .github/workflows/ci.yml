@@ -9,7 +9,7 @@ env:
   HOMEBREW_NO_INSTALL_CLEANUP: TRUE
   BUNDLE_PATH: vendor/bundle
 
-  WORKFLOW_PATH: .github/workflows
+  WORKFLOW_PATH: ./.github/workflows
   
 jobs:
   swiftlint:
@@ -34,7 +34,7 @@ jobs:
 
   build-test:
     # needs: swiftlint
-    uses: ${WORKFLOW_PATH}/build-test.yml
+    uses: $WORKFLOW_PATH/build-test.yml
 
   build-product:
     needs: build-test
