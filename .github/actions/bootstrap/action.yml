@@ -37,9 +37,3 @@ runs:
   - name: Install dependencies
     run: bundle install --jobs 4 --retry 3
     shell: bash
-
-  # Install Swift tools
-  - name: Generate Xcode project
-    uses: xavierLowmiller/xcodegen-action@1.1.2
-    with:
-      spec: .xcodegen.yml
