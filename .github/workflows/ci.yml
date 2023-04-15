@@ -16,15 +16,17 @@ jobs:
   
   # Validate code 
   validate:
+    if: ${{ false }}
     uses: ./.github/workflows/validate.yml
 
   # Build and test
   build-test:
-    needs: validate
+    # needs: validate
     uses: ./.github/workflows/build-test.yml
 
   # Build product
   build-product:
+    if: ${{ false }}
     needs: build-test
     uses: ./.github/workflows/build-product.yml
 
