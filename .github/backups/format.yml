@@ -1,3 +1,4 @@
+# trunk-ignore(prettier)
 name: Swift
 on:
   workflow_call:

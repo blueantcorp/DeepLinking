@@ -14,27 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
     - name: YamlLint
       run: yamllint --strict --format github .
-    
     - name: RuboCop
       run: bundle exec rubocop --format github
-  
     - name: SwiftLint
       run: |
         docker run --rm -v `pwd`:`pwd` -w `pwd` \
           ghcr.io/realm/swiftlint:0.49.1 \
-          swiftlint \
-            lint --strict \
+          swiftlint lint \
+            --strict \
             --config .swiftlint.yml \
             --reporter github-actions-logging
-
-      - name: SwiftFormat
-        run: |
-          docker run --rm -v `pwd`:`pwd` -w `pwd` \
-            ghcr.io/nicklockwood/swiftformat:0.50.3 \
-            --lint --config .swiftformat .
+    - name: SwiftFormat
+      run: |
+        docker run --rm -v `pwd`:`pwd` -w `pwd` \
+          ghcr.io/nicklockwood/swiftformat:0.50.3 \
+          --lint --config .swiftformat .
