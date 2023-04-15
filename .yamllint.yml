@@ -7,3 +7,4 @@ rules:
   truthy: disable
 ignore: |
   vendor
+  .github/backups/**/*
