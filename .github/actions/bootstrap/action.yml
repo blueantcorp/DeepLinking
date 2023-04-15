@@ -6,6 +6,11 @@ runs:
   steps:
   - uses: actions/checkout@v3
 
+  # Install Struct
+  - name: Install Struct
+    run: bundle exec struct install
+    shell: bash
+
   # Cache Swift Package Manager
   - uses: actions/cache@v3
     with:
@@ -31,13 +36,3 @@ runs:
       BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
-
-  # Install Bundler
-  - name: Install Bundler
-    run: bundle install --jobs 4 --retry 3
-    shell: bash
-
-  # Install Struct
-  - name: Install Struct
-    run: bundle exec struct install
-    shell: bash
