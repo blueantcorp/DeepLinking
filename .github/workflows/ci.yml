@@ -35,7 +35,7 @@ jobs:
 
   build-test:
     # needs: swiftlint
-    uses: $WORKFLOW_PATH/build-test.yml
+    uses: ./.github/workflows/build-test.yml
 
   build-product:
     needs: build-test
