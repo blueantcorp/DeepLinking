@@ -19,8 +19,7 @@ jobs:
       with:
         bundler-cache: true
     - name: YamlLint
-      run: |
-        yamllint --strict --format github .
+      run: yamllint --strict --format github .
     
     - name: RuboCop
       run: bundle exec rubocop --format github
