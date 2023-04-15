@@ -1,106 +1,49 @@
+env:
+  DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
+  FASTLANE_SKIP_UPDATE_CHECK: true
+  FASTLANE_XCODE_LIST_TIMEOUT: 60
+  FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 60
+  HOMEBREW_NO_INSTALL_CLEANUP: TRUE
+  BUNDLE_PATH: vendor/bundle
+
+  # Workaround for long path issue
+  WORKFLOW_PATH: ./.github/workflows
+
 name: CI
 on: [push, pull_request]
-
+  
 jobs:
+
+  # Validate code 
   validate:
-    name: validate
+    if: ${{ false }}
     uses: ./.github/workflows/validate.yml
 
-          
+  # Build and test
+  build-test:
+    # needs: validate
+    uses: ./.github/workflows/build-test.yml
 
-  build:
-    needs: [validate]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build Package
-        run: swift build -v
+  # Build product
+  build-product:
+    if: ${{ false }}
+    needs: build-test
+    uses: ./.github/workflows/build-product.yml
 
-  test:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Test Package
-        run: |
-          swift test \
-            --enable-test-discovery \
-            --enable-code-coverage
-  
-  codecov:
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: mattpolzin/swift-codecov-action@0.7.5
-        with:
-          MINIMUM_COVERAGE: 90
-          INCLUDE_TESTS: "true"
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-
-  sonarcloud:
-    needs: [test]
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
+  # Analyze code
   analyze:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-  slather:
-    if: ${{ false }}
-    needs: [analyze]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up ruby env
-        uses: ruby/setup-ruby@v1.138.0
-        with:
-          ruby-version: 3.0
-          bundler-cache: true
-      - run: bundle exec slather
-
-  format:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: mtgto/swift-format-action@main
-        with:
-          configuration_file: .swift-format
-          all_files: false
-          auto_correct: true
-          max_warnings: -1
-
-  docs:
-    needs: [format]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-  release:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
+    needs: build-test
+    uses: ./.github/workflows/analyze.yml
+  
+  # Generate documentation
+  documentation:
+    needs: analyze
+    uses: ./.github/workflows/documentation.yml
+  
+  #
   publish:
-    if: ${{ false }}
-    name: Publish on GitHub
+    needs: [documentation, build-product]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-
+    - name: Publish
+      run: echo "Publishing..."

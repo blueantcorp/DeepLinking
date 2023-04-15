@@ -1,0 +1,22 @@
+name: Build/Test
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Package
+      run: swift build -v
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Test Package
+      run: |
+        swift test \
+          --enable-test-discovery \
+          --enable-code-coverage

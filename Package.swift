@@ -12,7 +12,9 @@ let package = Package(
             targets: ["DeepLinking"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/yonaskolb/XcodeGen.git", from: "2.34.0"),
+    ],
     targets: [
         .target(name: "DeepLinking", dependencies: []),
         .testTarget(

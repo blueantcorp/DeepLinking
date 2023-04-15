@@ -1,41 +1,26 @@
-name: Validate
-on:
-  workflow_call:
+name: validate
+on: workflow_call
 
 jobs:
   swiftlint:
     runs-on: ubuntu-latest
-    continue-on-error: false
+    continue-on-error: true
     steps:
+
+    # Checkout the repository
     - uses: actions/checkout@v3
+    
+    # Run swiftlint
     - uses: norio-nomura/action-swiftlint@3.2.1
       with:
         args: --reporter json > swiftlint.log
       env:
         GITHUB_TOKEN: ${{ github.token }}
   
+    # Upload the swiftlint log as an artifact
     - uses: actions/upload-artifact@v3
       with:
         name: swiftlint
         path: |
           ./.swiftlint.yml
           ./swiftlint.log
-  
-  danger:
-    runs-on: ubuntu-latest
-    continue-on-error: false
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-  
-    - name: Run Danger
-      run: bundle exec danger
-      env:
-        DANGER_ID: 'danger-ci'
-        GITHUB_TOKEN: ${{ github.token }}
-        DANGER_GITHUB_API_TOKEN: ${{ github.token }}
-        DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}

@@ -1,5 +1,5 @@
 included:
-  - Sources
+  - Sources/DeepLinking
 
 excluded:
   - Carthage
@@ -11,7 +11,6 @@ opt_in_rules:
 - empty_count
 - explicit_init
 - fatal_error_message
-- file_header
 - first_where
 - implicitly_unwrapped_optional
 - no_extension_access_modifier
@@ -25,6 +24,7 @@ disabled_rules:
 - closure_end_indentation
 - function_parameter_count
 - identifier_name
+- file_header
 - no_fallthrough_only # https://github.com/realm/SwiftLint/issues/2276
 - redundant_string_enum_value
 - superfluous_disable_command

@@ -1,24 +1,17 @@
 name: bootstrap
 description: bootstrap project descr
 
-inputs:
-  ruby-version:
-    description: Ruby version
-    required: true
-    default: '3.0.0'
-
 runs:
   using: composite
   steps:
-    defaults:
-      run:
-        # Default working directory for all steps 
-        working-directory: ${{ github.workspace }}
-  
-  # Checkout the repository
   - uses: actions/checkout@v3
 
-  # Cache SPM dependencies
+  # Install Struct
+  - name: Install Struct
+    run: bundle exec struct install
+    shell: bash
+
+  # Cache Swift Package Manager
   - uses: actions/cache@v3
     with:
       path: .build
@@ -27,14 +20,19 @@ runs:
         ${{ runner.os }}-spm-
   
   # Cache build artifacts
-  - name: Restore buildcache
-    uses: mikehardy/buildcache-action@v1
+  - name: Cache build artifacts
+    uses: mikehardy/buildcache-action@v2
     continue-on-error: true
 
-  # Install Ruby gems
+  # Setup Ruby (bundle)
   - name: Setup Ruby (bundle)
     uses: ruby/setup-ruby@v1
     with:
-      ruby-version: 2.6
       bundler-cache: true
-      working-directory: ${{ github.workspace }} 
+      working-directory: ${{ github.workspace }}
+    env:
+      BUNDLE_VERSION: ${{ inputs.bundler-version }}
+      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
+      BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3

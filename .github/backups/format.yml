@@ -1,18 +1,6 @@
 name: Swift
-
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - ".github/workflows/swift.yaml"
-      - "**.swift"
-      - "**/Package.resolved"
-  pull_request:
-    paths:
-      - ".github/workflows/swift.yaml"
-      - "**.swift"
-      - "**/Package.resolved"
+on: 
+  workflow_call:
 
 jobs:
   swiftformat:
