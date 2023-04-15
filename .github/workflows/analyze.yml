@@ -3,7 +3,6 @@ on: workflow_call
 
 jobs:
   slather:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -42,8 +41,7 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-
-    # Install Codecov
+    - uses: sersoft-gmbh/swift-coverage-action@v3
     - uses: mattpolzin/swift-codecov-action@0.7.5
       with:
         MINIMUM_COVERAGE: 90
