@@ -23,16 +23,14 @@ targets:
   
     sources:
       - Sources
-      - path: Sources/MyFramework.h
+      - path: Sources/DeepLinking.h
         buildPhase: headers
         headerVisibility: public
 
   DeepLinkingTests:
     type: bundle.unit-test
     platform: iOS
-
-    sources:
-      - Tests
+    sources: Tests
 
     dependencies:
       - target: DeepLinking
