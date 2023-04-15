@@ -16,7 +16,7 @@ jobs:
   
   # Validate code 
   validate:
-    uses: ./.github/workflows/build-test.yml
+    uses: ./.github/workflows/validate.yml
 
   # Build and test
   build-test:
