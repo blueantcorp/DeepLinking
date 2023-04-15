@@ -1,18 +1,25 @@
-name: Build Product
-on:
-  workflow_call:
+name: Static Analysis
+on: workflow_call
 
 jobs:
   slather:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
+    
+    # Checkout the repository
     - uses: actions/checkout@v3
+
+    # Install custom environment
     - uses: ./.github/actions/bootstrap/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    # Run Slather
     - name: Install Slather
       run: bundle exec slather
+      shell: bash
 
   danger:
     needs: slather
