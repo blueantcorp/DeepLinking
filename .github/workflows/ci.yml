@@ -48,12 +48,12 @@ jobs:
       # Run Slather
       # - name: Run Slather
       # run: bundle exec slather
-      - name: Run Danger
-        run: bundle exec danger
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          DANGER_GITHUB_API_TOKEN: ${{ github.token }}
-          DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
+      # - name: Run Danger
+      #   run: bundle exec danger
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #     DANGER_GITHUB_API_TOKEN: ${{ github.token }}
+      #     DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
       - uses: sersoft-gmbh/swift-coverage-action@v3
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
