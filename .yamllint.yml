@@ -8,3 +8,7 @@ rules:
 ignore: |
   vendor
   .github/backups/**/*
+  .slather.yml
+  .swiftlint.yml
+  .yamllint.yml
+  .rubocop.yml
