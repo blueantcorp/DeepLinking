@@ -135,7 +135,7 @@ public struct DeepLinkRecognizer {
     public func deepLink(matching url: URL) -> DeepLink? {
         for deepLinkType in deepLinkTypes {
             guard let values = DeepLinkRecognizer.extractValues(in: deepLinkType.template, from: url) else {
-                return
+                return nil
             }
 
             return deepLinkType.init(values: values)
