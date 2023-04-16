@@ -54,7 +54,7 @@ jobs:
       #     GITHUB_TOKEN: ${{ github.token }}
       #     DANGER_GITHUB_API_TOKEN: ${{ github.token }}
       #     DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
-      - uses: sersoft-gmbh/swift-coverage-action@v3
+      # - uses: sersoft-gmbh/swift-coverage-action@v3
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
           MINIMUM_COVERAGE: 90
