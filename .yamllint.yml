@@ -12,3 +12,4 @@ ignore: |
   .swiftlint.yml
   .yamllint.yml
   .rubocop.yml
+  .xcodegen.yml
