@@ -10,7 +10,7 @@ env:
   BUNDLE_PATH: vendor/bundle
 
 jobs:
-  main:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +36,11 @@ jobs:
             ghcr.io/nicklockwood/swiftformat:0.50.3 \
             --config .swiftformat .
 
-      # Build and test the package
+  # Build and test the package
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Build Package
         run: swift build -v
       - name: Test Package
@@ -44,6 +48,15 @@ jobs:
           swift test \
             --enable-test-discovery \
             --enable-code-coverage
+
+  # Check code coverage
+  code-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       # Run Slather
       - name: Run Slather
