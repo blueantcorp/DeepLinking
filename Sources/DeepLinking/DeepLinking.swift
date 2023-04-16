@@ -44,8 +44,8 @@ public struct DeepLinkValues {
 /// Describes how to extract a deep link's values from a URL.
 /// A template is considered to match a URL if all of its required values are found in the URL.
 public struct DeepLinkTemplate {
+    
     // MARK: - Public API
-
     public init() {
         self.init(pathParts: [], parameters: [])
     }
@@ -134,10 +134,13 @@ public struct DeepLinkRecognizer {
     /// Returns a new `DeepLink` object whose template matches the specified URL, if possible.
     public func deepLink(matching url: URL) -> DeepLink? {
         for deepLinkType in deepLinkTypes {
-            if let values = DeepLinkRecognizer.extractValues(in: deepLinkType.template, from: url) {
-                return deepLinkType.init(values: values)
+            guard let values = DeepLinkRecognizer.extractValues(in: deepLinkType.template, from: url) else {
+                return
             }
+
+            return deepLinkType.init(values: values)
         }
+
         return nil
     }
 
