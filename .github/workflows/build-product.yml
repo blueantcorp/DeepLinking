@@ -6,7 +6,7 @@ jobs:
   archive:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Archiving..." 
+      - run: echo "Archiving..."
 
   provision:
     needs: archive

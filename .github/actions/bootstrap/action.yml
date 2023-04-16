@@ -18,7 +18,7 @@ runs:
         key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-spm-
-    
+
     # Cache build artifacts
     - name: Cache build artifacts
       uses: mikehardy/buildcache-action@v2

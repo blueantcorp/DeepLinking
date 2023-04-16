@@ -9,14 +9,14 @@ jobs:
 
       # Checkout the repository
       - uses: actions/checkout@v3
-      
+
       # Run swiftlint
       - uses: norio-nomura/action-swiftlint@3.2.1
         with:
           args: --reporter json > swiftlint.log
         env:
           GITHUB_TOKEN: ${{ github.token }}
-    
+
       # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3
         with:
