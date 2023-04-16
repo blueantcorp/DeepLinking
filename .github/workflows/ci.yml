@@ -10,7 +10,7 @@ env:
   BUNDLE_PATH: vendor/bundle
 
 jobs:
-  lint:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -42,3 +42,5 @@ jobs:
           swift test \
             --enable-test-discovery \
             --enable-code-coverage
+      - name: Run Slather
+        run: bundle exec slather
