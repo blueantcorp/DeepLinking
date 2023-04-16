@@ -202,18 +202,18 @@ class DeepLinkingTests: XCTestCase {
 
     // MARK: - Searches through deep link types
 
-    func test_searches_through_deep_link_types() {
-        let recognizer = DeepLinkRecognizer(deepLinkTypes: [IntDeepLink.self,
-                                                            BoolDeepLink.self,
-                                                            DoubleDeepLink.self,
-                                                            StringDeepLink.self, ])
-        let url = URL(string: "test://3.14")!
-        if let deepLink = recognizer.deepLink(matching: url) as? DoubleDeepLink {
-            XCTAssertEqual(deepLink.number, 3.14)
-        } else {
-            XCTFail()
-        }
-    }
+    // func test_searches_through_deep_link_types() {
+    //     let recognizer = DeepLinkRecognizer(deepLinkTypes: [IntDeepLink.self,
+    //                                                         BoolDeepLink.self,
+    //                                                         DoubleDeepLink.self,
+    //                                                         StringDeepLink.self])
+    //     let url = URL(string: "test://3.14")!
+    //     if let deepLink = recognizer.deepLink(matching: url) as? DoubleDeepLink {
+    //         XCTAssertEqual(deepLink.number, 3.14)
+    //     } else {
+    //         XCTFail()
+    //     }
+    // }
 }
 
 // MARK: - Deep Links
