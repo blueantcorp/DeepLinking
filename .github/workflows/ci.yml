@@ -46,12 +46,12 @@ jobs:
             --enable-code-coverage
 
       # Run Slather
-      # - name: Run Slather
-      #   run: bundle exec slather
+      - name: Run Slather
+        run: ls -l && bundle exec slather
 
       # Danger integration
       - name: Run Danger
-        run: ls -l && bundle exec danger
+        run: bundle exec danger
         env:
           GITHUB_TOKEN: ${{ github.token }}
           DANGER_GITHUB_API_TOKEN: ${{ github.token }}
