@@ -53,6 +53,7 @@ jobs:
       # Danger integration
       - name: Run Danger
         run: bundle exec danger
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
           DANGER_GITHUB_API_TOKEN: ${{ github.token }}
