@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'Pods/**/*'
     - 'vendor/**/*'
+    - 'Dangerfile'
 
 Metrics/BlockLength:
   Enabled: false
