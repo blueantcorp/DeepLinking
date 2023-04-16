@@ -44,7 +44,7 @@ public struct DeepLinkValues {
 /// Describes how to extract a deep link's values from a URL.
 /// A template is considered to match a URL if all of its required values are found in the URL.
 public struct DeepLinkTemplate {
-    
+
     // MARK: - Public API
     public init() {
         self.init(pathParts: [], parameters: [])
