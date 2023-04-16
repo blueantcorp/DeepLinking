@@ -14,7 +14,7 @@ jobs:
       - uses: ./.github/actions/bootstrap/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       # Run Slather
       - name: Install Slather
         run: bundle exec slather
@@ -61,5 +61,5 @@ jobs:
         run: echo ${{ secrets.SONAR_TOKEN }}
       - uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
