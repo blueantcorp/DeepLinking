@@ -34,4 +34,4 @@ jobs:
         run: |
           docker run --rm -v `pwd`:`pwd` -w `pwd` \
             ghcr.io/nicklockwood/swiftformat:0.50.3 \
-            --lint --config .swiftformat .
+            --lint --config .swiftformat . | xcpretty -r github-actions-logging
