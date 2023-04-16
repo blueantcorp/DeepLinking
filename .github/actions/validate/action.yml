@@ -9,15 +9,15 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - uses: norio-nomura/action-swiftlint@3.2.1
-    with:
-      args: --reporter json > swiftlint.log
-    env:
-      GITHUB_TOKEN: ${{ inputs.github-token }}
+    - uses: norio-nomura/action-swiftlint@3.2.1
+      with:
+        args: --reporter json > swiftlint.log
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
 
-  - uses: actions/upload-artifact@v3
-    with:
-      name: swiftlint
-      path: |
-        ./.swiftlint.yml
-        ./swiftlint.log
+    - uses: actions/upload-artifact@v3
+      with:
+        name: swiftlint
+        path: |
+          ./.swiftlint.yml
+          ./swiftlint.log

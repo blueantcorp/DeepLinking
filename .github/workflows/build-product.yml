@@ -6,18 +6,18 @@ jobs:
   archive:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "Archiving..."
+      - run: echo "Archiving..." 
 
   provision:
     needs: archive
     runs-on: ubuntu-latest
     steps:
-    - name: Provision
-      run: echo "Provisioning..."
+      - name: Provision
+        run: echo "Provisioning..."
 
   export:
     needs: provision
     runs-on: ubuntu-latest
     steps:
-    - name: Export
-      run: echo "Exporting..."
+      - name: Export
+        run: echo "Exporting..."
