@@ -47,7 +47,7 @@ jobs:
 
       # Run Slather
       - name: Run Slather
-        run: ls -l && bundle exec slather
+        run: echo $PWD && ls -l && bundle exec slather
 
       # Danger integration
       - name: Run Danger
