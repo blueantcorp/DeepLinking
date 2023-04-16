@@ -55,11 +55,17 @@ jobs:
       #     DANGER_GITHUB_API_TOKEN: ${{ github.token }}
       #     DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
       # - uses: sersoft-gmbh/swift-coverage-action@v3
+
+      # Codecov integration
       - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
           MINIMUM_COVERAGE: 90
           INCLUDE_TESTS: "true"
-
-      # Upload coverage to Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+
+      # SonarCloud integration
+      - uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
