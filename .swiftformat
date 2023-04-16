@@ -18,5 +18,3 @@
 --header strip
 --disable redundantRawValues
 --disable trailingclosures
-
---verbose
