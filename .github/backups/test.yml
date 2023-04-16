@@ -5,23 +5,23 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      # Test
-      - name: Test Package
-        run: |
-          swift test \
-            --enable-test-discovery \
-            --enable-code-coverage
+    - uses: actions/checkout@v3
+    
+    # Test
+    - name: Test Package
+      run: |
+        swift test \
+          --enable-test-discovery \
+          --enable-code-coverage
 
-      - uses: mattpolzin/swift-codecov-action@0.7.5
-        with:
-          MINIMUM_COVERAGE: 90
-          INCLUDE_TESTS: 'true'
+    - uses: mattpolzin/swift-codecov-action@0.7.5
+      with:
+        MINIMUM_COVERAGE: 90
+        INCLUDE_TESTS: 'true'
 
-    # Slather
+  # Slather
 #    - run: bundle exec slather
-      
-      # Codecov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+    
+    # Codecov
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3

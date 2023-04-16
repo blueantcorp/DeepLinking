@@ -11,5 +11,5 @@ jobs:
   SwiftLint:
     runs-on: composite
     steps:
-      - uses: actions/checkout@v3
-      - uses: norio-nomura/action-swiftlint@3.2.1
+    - uses: actions/checkout@v3
+    - uses: norio-nomura/action-swiftlint@3.2.1
