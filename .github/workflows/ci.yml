@@ -35,3 +35,10 @@ jobs:
           docker run --rm -v `pwd`:`pwd` -w `pwd` \
             ghcr.io/nicklockwood/swiftformat:0.50.3 \
             --config .swiftformat .
+      - name: Build Package
+        run: swift build -v
+      - name: Test Package
+        run: |
+          swift test \
+            --enable-test-discovery \
+            --enable-code-coverage
