@@ -35,6 +35,8 @@ jobs:
           docker run --rm -v `pwd`:`pwd` -w `pwd` \
             ghcr.io/nicklockwood/swiftformat:0.50.3 \
             --config .swiftformat .
+
+      # Build and test the package
       - name: Build Package
         run: swift build -v
       - name: Test Package
@@ -42,5 +44,13 @@ jobs:
           swift test \
             --enable-test-discovery \
             --enable-code-coverage
-      - name: Run Slather
-        run: bundle exec slather
+
+      # Run Slather
+      # - name: Run Slather
+      # run: bundle exec slather
+      - name: Run Danger
+        run: bundle exec danger
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DANGER_GITHUB_API_TOKEN: ${{ github.token }}
+          DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
