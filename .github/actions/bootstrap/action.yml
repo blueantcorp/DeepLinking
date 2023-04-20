@@ -29,10 +29,3 @@ runs:
     uses: ruby/setup-ruby@v1
     with:
       bundler-cache: true
-      working-directory: ${{ github.workspace }}
-    env:
-      BUNDLE_VERSION: ${{ inputs.bundler-version }}
-      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
-      BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
-      BUNDLE_JOBS: 4
-      BUNDLE_RETRY: 3
