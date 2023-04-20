@@ -10,23 +10,21 @@ name: CI
 on: [push]
   
 jobs:
-  code-coverage-report:
+  codecov:
+    container:
+      image: swift:5.8
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        uses: actions/checkout@v1
-      - run: swift test --enable-code-coverage
-      - uses: michaelhenry/swifty-code-coverage@v1.0.1
+      - uses: actions/checkout@v3
+      - run: swift test --enable-test-discovery --enable-code-coverage
+      - uses: mattpolzin/swift-codecov-action@0.7.5
         with:
-          build-path: .build
-          target: GithubChecksPackageTests.xctest
-          is-spm: true
-      - name: Upload to Codecov
-        run: |
-          bash <(curl https://codecov.io/bash) -f "coverage/*.info"
-        shell: bash
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          MINIMUM_COVERAGE: 98
+          INCLUDE_TESTS: 'true'
+          
+      # Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
 
   # Validate code 
   validate:
