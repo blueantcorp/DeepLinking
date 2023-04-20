@@ -4,6 +4,7 @@ on:
 
 jobs:
   build:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -14,8 +15,7 @@ jobs:
           --enable-code-coverage
 
   test:
-    if: ${{ false }}
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
