@@ -20,3 +20,16 @@ jobs:
         swift test \
           --enable-test-discovery \
           --enable-code-coverage
+
+  test-osx:
+    needs: build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Test Package
+      run: |
+        xcodebuild test \
+          -scheme Rester \
+          -destination platform="iOS" \
+          -enableCodeCoverage YES \
+          -derivedDataPath .build/derivedData
