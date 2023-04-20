@@ -9,17 +9,17 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-    - name: Format source code
-      uses: mtgto/swift-format-action@main
-      with:
-        configuration_file: ./.swift-format
-        all_files: false
-        auto_correct: true
-        max_warnings: -1
+      - name: Format source code
+        uses: mtgto/swift-format-action@main
+        with:
+          configuration_file: ./.swift-format
+          all_files: false
+          auto_correct: true
+          max_warnings: -1
 
   generate:
     needs: format
     runs-on: ubuntu-latest
     steps:
-    - name: Generate Docs
-      run: echo "Generating Docs..."
+      - name: Generate Docs
+        run: echo "Generating Docs..."

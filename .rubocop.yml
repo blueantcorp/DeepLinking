@@ -1,0 +1,16 @@
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  Exclude:
+    - 'Pods/**/*'
+    - 'vendor/**/*'
+    - 'Dangerfile'
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never

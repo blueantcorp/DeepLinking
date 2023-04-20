@@ -1,5 +1,6 @@
+# trunk-ignore(prettier)
 name: Swift
-on: 
+on:
   workflow_call:
 
 jobs:

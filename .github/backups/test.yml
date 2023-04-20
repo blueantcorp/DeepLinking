@@ -20,7 +20,7 @@ jobs:
           INCLUDE_TESTS: 'true'
 
     # Slather
-#    - run: bundle exec slather
+  #    - run: bundle exec slather
       
       # Codecov
       - name: Upload coverage to Codecov

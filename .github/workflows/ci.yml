@@ -1,3 +1,6 @@
+name: CI
+on: [pull_request]
+
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
   FASTLANE_SKIP_UPDATE_CHECK: true
@@ -6,44 +9,96 @@ env:
   HOMEBREW_NO_INSTALL_CLEANUP: TRUE
   BUNDLE_PATH: vendor/bundle
 
-  # Workaround for long path issue
-  WORKFLOW_PATH: ./.github/workflows
-
-name: CI
-on: [push, pull_request]
-  
 jobs:
-
-  # Validate code 
+  # Validate code style
   validate:
     if: ${{ false }}
-    uses: ./.github/workflows/validate.yml
-
-  # Build and test
-  build-test:
-    # needs: validate
-    uses: ./.github/workflows/build-test.yml
-
-  # Build product
-  build-product:
-    if: ${{ false }}
-    needs: build-test
-    uses: ./.github/workflows/build-product.yml
-
-  # Analyze code
-  analyze:
-    needs: build-test
-    uses: ./.github/workflows/analyze.yml
-  
-  # Generate documentation
-  documentation:
-    needs: analyze
-    uses: ./.github/workflows/documentation.yml
-  
-  #
-  publish:
-    needs: [documentation, build-product]
     runs-on: ubuntu-latest
     steps:
-    - name: Publish
-      run: echo "Publishing..."
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: YamlLint
+        run: yamllint --strict --format github .
+      - name: RuboCop
+        run: bundle exec rubocop --format github
+      - name: SwiftLint
+        run: |
+          docker run --rm -v `pwd`:`pwd` -w `pwd` \
+            ghcr.io/realm/swiftlint:0.49.1 \
+            swiftlint lint \
+              --fix \
+              --format \
+              --config .swiftlint.yml \
+              --reporter github-actions-logging
+      - name: SwiftFormat
+        run: |
+          docker run --rm -v `pwd`:`pwd` -w `pwd` \
+            ghcr.io/nicklockwood/swiftformat:0.50.3 \
+            --config .swiftformat .
+
+  # Build and test the package
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Package
+        run: swift build -v
+      - name: Test Package
+        run: |
+          swift test \
+            --enable-test-discovery \
+            --enable-code-coverage      
+            
+      # Danger integration
+      - name: Danger
+        uses: 417-72KI/danger-swiftlint@v5.7
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  # Check code coverage
+  code-coverage:
+    if: ${{ false }}
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      # Slather integration
+      - name: Run Slather
+        run: bundle exec slather
+        continue-on-error: true
+
+      # Danger integration
+      - name: Run Danger
+        run: bundle exec danger
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DANGER_GITHUB_API_TOKEN: ${{ github.token }}
+          DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
+
+      # Codecov integration
+      - uses: mattpolzin/swift-codecov-action@0.7.5
+        with:
+          MINIMUM_COVERAGE: 90
+          INCLUDE_TESTS: "true"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./codecov.txt
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      # SonarCloud integration
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

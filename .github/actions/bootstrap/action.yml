@@ -4,35 +4,35 @@ description: bootstrap project descr
 runs:
   using: composite
   steps:
-  - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-  # Install Struct
-  - name: Install Struct
-    run: bundle exec struct install
-    shell: bash
+    # Install Struct
+    - name: Install Struct
+      run: bundle exec struct install
+      shell: bash
 
-  # Cache Swift Package Manager
-  - uses: actions/cache@v3
-    with:
-      path: .build
-      key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-      restore-keys: |
-        ${{ runner.os }}-spm-
-  
-  # Cache build artifacts
-  - name: Cache build artifacts
-    uses: mikehardy/buildcache-action@v2
-    continue-on-error: true
+    # Cache Swift Package Manager
+    - uses: actions/cache@v3
+      with:
+        path: .build
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
 
-  # Setup Ruby (bundle)
-  - name: Setup Ruby (bundle)
-    uses: ruby/setup-ruby@v1
-    with:
-      bundler-cache: true
-      working-directory: ${{ github.workspace }}
-    env:
-      BUNDLE_VERSION: ${{ inputs.bundler-version }}
-      BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
-      BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
-      BUNDLE_JOBS: 4
-      BUNDLE_RETRY: 3
+    # Cache build artifacts
+    - name: Cache build artifacts
+      uses: mikehardy/buildcache-action@v2
+      continue-on-error: true
+
+    # Setup Ruby (bundle)
+    - name: Setup Ruby (bundle)
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        working-directory: ${{ github.workspace }}
+      env:
+        BUNDLE_VERSION: ${{ inputs.bundler-version }}
+        BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
+        BUNDLE_PATH: ${{ github.workspace }}/.vendor/bundle
+        BUNDLE_JOBS: '4'
+        BUNDLE_RETRY: '3'

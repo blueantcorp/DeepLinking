@@ -14,7 +14,7 @@ runs:
         args: --reporter json > swiftlint.log
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
-  
+
     - uses: actions/upload-artifact@v3
       with:
         name: swiftlint

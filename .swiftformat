@@ -1,38 +1,20 @@
-# file options
+--exclude vendor,Pods,**/Swiftgen/**,**/Resources/**,fastlane
 
---exclude Tests/XCTestManifests.swift,Tests/BadConfig,Snapshots,Build,PluginTests
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--closingparen balanced
 
-# format options
+--stripunusedargs closure-only
 
---allman false
---binarygrouping 4,8
---commas always
---decimalgrouping 3,6
---elseposition same-line
---voidtype void
---exponentcase lowercase
---exponentgrouping disabled
---fractiongrouping disabled
---header ignore
---hexgrouping 4,8
---hexliteralcase uppercase
---ifdef indent
---indent 4
---indentcase false
---importgrouping testable-bottom
---linebreaks lf
---maxwidth none
---octalgrouping 4,8
---operatorfunc spaced
---patternlet hoist
---ranges spaced
---self remove
---semicolons inline
---stripunusedargs always
---trimwhitespace always
---wraparguments preserve
---wrapcollections preserve
+--ifdef no-indent
 
-# rules
+--disable wrapMultilineStatementBraces 
 
---enable isEmpty
+--maxwidth 120
+
+--self init-only
+--guardelse same-line
+--header strip
+--disable redundantRawValues
+--disable trailingclosures
