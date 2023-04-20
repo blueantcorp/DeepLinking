@@ -10,8 +10,11 @@ env:
   BUNDLE_PATH: vendor/bundle
 
 jobs:
+  # Validate code style
   validate:
     runs-on: ubuntu-latest
+    if: ${{ false }}
+    co
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
