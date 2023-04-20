@@ -12,8 +12,8 @@ env:
 jobs:
   # Validate code style
   validate:
-    runs-on: ubuntu-latest
     if: ${{ false }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
@@ -40,7 +40,6 @@ jobs:
 
   # Build and test the package
   build-test:
-    after: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
