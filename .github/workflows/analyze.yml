@@ -26,6 +26,7 @@ jobs:
       shell: bash
 
   danger:
+    if: ${{ false }}
     needs: slather
     runs-on: ubuntu-latest
     continue-on-error: true
