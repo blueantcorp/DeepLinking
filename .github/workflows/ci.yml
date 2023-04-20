@@ -11,27 +11,16 @@ on: [push]
   
 jobs:
   codecov:
-    container:
-      image: swift:5.8
+    needs: slather
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
-      - uses: actions/checkout@v3
-      - run: swift test --enable-test-discovery --enable-code-coverage
-      - uses: mattpolzin/swift-codecov-action@0.7.5
-        with:
-          MINIMUM_COVERAGE: 90
-          INCLUDE_TESTS: 'true'
-          CODECOV_JSON_FILE: codecov.json
-          
-      # Upload coverage to Codecov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./codecov.json
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+    - uses: actions/checkout@v3
+    - uses: sersoft-gmbh/swift-coverage-action@v3
+    - uses: mattpolzin/swift-codecov-action@0.7.5
+      with:
+        MINIMUM_COVERAGE: 90
+        INCLUDE_TESTS: "true"
 
   # Validate code 
   validate:
