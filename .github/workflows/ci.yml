@@ -32,6 +32,7 @@ jobs:
   analyze:
     needs: build-test
     uses: ./.github/workflows/analyze.yml
+    secrets: inherit
   
   # Generate documentation
   documentation:
