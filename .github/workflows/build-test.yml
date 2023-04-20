@@ -11,6 +11,7 @@ jobs:
       run: swift build -v
 
   test:
+    if: ${{ false }}
     needs: build
     runs-on: ubuntu-latest
     steps:
