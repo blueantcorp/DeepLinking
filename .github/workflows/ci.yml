@@ -25,7 +25,6 @@ jobs:
 
   # Build product
   build-product:
-    if: ${{ false }}
     needs: build-test
     uses: ./.github/workflows/build-product.yml
 
