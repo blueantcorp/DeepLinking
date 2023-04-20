@@ -14,9 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
+      - run: |
+          swift test \
+            --enable-test-discovery \
+            --enable-code-coverage
+
       - uses: sersoft-gmbh/swift-coverage-action@v3
         id: coverage-files
-      - uses: codecov/codecov-action@v2
+
+      - uses: codecov/codecov-action@v3
         with:
           files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
 
