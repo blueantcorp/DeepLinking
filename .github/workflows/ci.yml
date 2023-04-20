@@ -15,18 +15,18 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          swift test \
-            --enable-test-discovery \
-            --enable-code-coverage
-
-      - uses: sersoft-gmbh/swift-coverage-action@v3
-        id: coverage-files
-
+      - run: swift test --enable-code-coverage -v
+      - uses: mattpolzin/swift-codecov-action@0.7.5
       - uses: codecov/codecov-action@v3
         with:
-          files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
-
+          file: ./codecov.txt
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          path: ./codecov.txt
+          
   # Validate code 
   validate:
     if: ${{ false }}
