@@ -40,7 +40,7 @@ jobs:
 
   # Build and test the package
   build-test:
-    needs: validate
+    after: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
