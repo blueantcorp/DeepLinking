@@ -14,12 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-    - uses: actions/checkout@v3
-    - uses: sersoft-gmbh/swift-coverage-action@v3
-    - uses: mattpolzin/swift-codecov-action@0.7.5
-      with:
-        MINIMUM_COVERAGE: 90
-        INCLUDE_TESTS: "true"
+      - uses: sersoft-gmbh/swift-coverage-action@v3
+        id: coverage-files
+      - uses: codecov/codecov-action@v2
+        with:
+          files: ${{join(fromJSON(steps.coverage-files.outputs.files), ',')}}
 
   # Validate code 
   validate:
