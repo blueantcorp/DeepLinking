@@ -8,7 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Package
-      run: swift build -v
+      run: |
+        swift build -v \
+          --enable-test-discovery \
+          --enable-code-coverage
 
   test:
     if: ${{ false }}
@@ -22,15 +25,9 @@ jobs:
           --enable-test-discovery \
           --enable-code-coverage
 
-  test-osx:
-    needs: build
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Test Package
-      run: |
-        xcodebuild test \
-          -scheme Rester \
-          -destination platform="iOS" \
-          -enableCodeCoverage YES \
-          -derivedDataPath .build/derivedData
+    - name: Prepare Code Coverage
+      run: llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/${{ env.PACKAGE_NAME }}PackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
+    - name: Upload to CodeCov.io
+      run: bash <(curl https://codecov.io/bash)
+      env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
