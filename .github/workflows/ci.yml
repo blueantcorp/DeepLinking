@@ -52,17 +52,10 @@ jobs:
             --enable-code-coverage      
             
       # Danger integration
-      - name: Run Danger
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - run: bundle exec danger
-        continue-on-error: true
+      - name: Danger
+        uses: 417-72KI/danger-swiftlint@v5.7
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          DANGER_GITHUB_API_TOKEN: ${{ github.token }}
-          DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
 
   # Check code coverage
   code-coverage:
