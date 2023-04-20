@@ -53,7 +53,11 @@ jobs:
             
       # Danger integration
       - name: Run Danger
-        run: bundle exec danger
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - run: bundle exec danger
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
