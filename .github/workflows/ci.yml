@@ -14,6 +14,24 @@ on: [push, pull_request]
   
 jobs:
 
+  code-coverage-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        uses: actions/checkout@v1
+      - run: swift test --enable-code-coverage
+      - uses: michaelhenry/swifty-code-coverage@v1.0.0
+        with:
+          build-path: .build
+          target: GithubChecksPackageTests.xctest
+          is-spm: true
+      - name: Upload to Codecov
+        run: |
+          bash <(curl https://codecov.io/bash) -f "coverage/*.info"
+        shell: bash
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   # Validate code 
   validate:
     if: ${{ false }}
@@ -21,7 +39,7 @@ jobs:
 
   # Build and test
   build-test:
-    # needs: validate
+    needs: validate
     uses: ./.github/workflows/build-test.yml
 
   # Build product
