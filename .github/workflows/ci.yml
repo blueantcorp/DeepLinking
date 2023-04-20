@@ -38,6 +38,7 @@ jobs:
 
   # Build and test the package
   build-test:
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,6 +52,7 @@ jobs:
 
   # Check code coverage
   code-coverage:
+    needs: build-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
