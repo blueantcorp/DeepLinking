@@ -1,5 +1,10 @@
 name: Static Analysis
-on: workflow_call
+on: 
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        description: 'SonarCloud token'
+        required: true
 
 jobs:
   slather:
