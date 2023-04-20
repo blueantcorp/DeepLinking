@@ -21,7 +21,7 @@ jobs:
         with:
           MINIMUM_COVERAGE: 90
           INCLUDE_TESTS: 'true'
-          OUTPUT_FILE: codecov.yml
+          CODECOV_JSON_FILE: codecov.json
           
       # Upload coverage to Codecov
       - name: Upload coverage to Codecov
