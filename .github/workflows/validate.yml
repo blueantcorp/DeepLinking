@@ -41,7 +41,8 @@ jobs:
           url: https://github.com/danger/swift
           version: '*'
 
-      - run: npm install -g danger
+      - name: Install DangerJS
+        run: npm install -g danger
 
       - name: Danger
         run: |
