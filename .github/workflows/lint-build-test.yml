@@ -34,10 +34,7 @@ jobs:
       - uses: mikehardy/buildcache-action@v2
 
       - name: Build Package
-        run: |
-          set -o pipefail && \
-          swift build -v \
-          | xcpretty
+        run: swift build
   
   test:
     needs: build
@@ -50,12 +47,10 @@ jobs:
 
       - name: Test Package
         run: |
-          set -o pipefail && \
           swift test \
-            --no-build \
             --enable-test-discovery \
             --enable-code-coverage \
-            | xcpretty
+            --parallel
 
       - uses: openbynature/swifty-code-coverage@v1.0.2
         with:
