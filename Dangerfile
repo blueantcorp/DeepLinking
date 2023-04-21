@@ -1,6 +1,8 @@
 require 'open3'
 
-swiftlint.lint_files
+swiftlint.lint_files(inline_mode: true, 
+                     strict: false, 
+                     config_file: '.swiftlint.yml')
 
 # Warn when there is a big PR
 warn('Big PR') if git.lines_of_code > 500
