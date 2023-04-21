@@ -10,10 +10,11 @@ jobs:
 
   danger:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-    - uses: ./.github/actions/bootstrap/
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
 
     - name: Run Danger
       run: bundle exec danger
