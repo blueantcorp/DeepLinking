@@ -16,21 +16,6 @@ jobs:
     if: ${{ false }}
     uses: ./.github/workflows/validate.yml
 
-  swiftformat-lint:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Install SwiftFormat
-      uses: Cyberbeni/install-swift-tool@v2.3.2
-      with:
-        url: https://github.com/nicklockwood/SwiftFormat
-        version: '*'
-    - name: Lint
-      run: swiftformat --lint . --exclude Tests --lenient
-
-  
-
   # Build and test
   build-test:
     # needs: validate

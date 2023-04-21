@@ -17,7 +17,6 @@ jobs:
   test:
     # needs: build
     runs-on: ubuntu-latest
-    container: llvmorg/llvm:latest
     steps:
       - uses: actions/checkout@v3
       - name: Test Package
