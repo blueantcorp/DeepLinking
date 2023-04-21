@@ -28,5 +28,12 @@ jobs:
       - uses: michaelhenry/swifty-code-coverage@v1.0.1
         with:
           build-path: .build
-          target: .build/debug/DemoPackageTests.xctest
+          target: .build/debug/DeepLinkingPackageTests.xctest
           is-spm: true
+      
+      - name: Upload to Codecov
+        run: |
+          bash <(curl https://codecov.io/bash) -f "coverage/*.info"
+        shell: bash
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
