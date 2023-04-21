@@ -6,9 +6,9 @@ gem 'danger'
 
 gem 'danger-swiftlint'
 gem 'danger-xcov'
-gem 'danger-prose'
-gem 'danger-mention'
-gem 'danger-changelog'
-gem 'danger-xcpretty'
+# gem 'danger-prose'
+# gem 'danger-mention'
+# gem 'danger-changelog'
+# gem 'danger-xcpretty'
 
 gem 'faraday-retry'
