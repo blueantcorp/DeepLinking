@@ -35,10 +35,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: danger/
       - uses: Cyberbeni/install-swift-tool@v2
         with:
           url: https://github.com/danger/swift
           version: '*'
+
+      - run: npm install -g danger
 
       - name: Danger
         run: |
