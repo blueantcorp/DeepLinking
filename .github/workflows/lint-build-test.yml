@@ -1,12 +1,9 @@
 name: Lint/Build/Test
 on: 
   workflow_call:
-  push:
-    branches:
-      - feature/*
 
 jobs:
-  validate:
+  lint:
     runs-on: ubuntu-latest
     steps:
 
@@ -28,9 +25,18 @@ jobs:
             ./.swiftlint.yml
             ./swiftlint.log
   
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
       - name: Build Package
         run: |
           swift build -v
+  
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
 
       - name: Test Package
         run: |
