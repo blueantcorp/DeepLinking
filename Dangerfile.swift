@@ -86,7 +86,7 @@ let manifests = [
     "Cartfile",
     "Cartfile.resolved",
     "Package.swift",
-    "Package.resolved"
+    "Package.resolved",
 ]
 let updatedManifests = manifests.filter { manifest in danger.git.modifiedFiles.contains { $0.name == manifest } }
 if !updatedManifests.isEmpty && updatedManifests.count != manifests.count {
