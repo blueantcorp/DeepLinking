@@ -39,8 +39,6 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: development
     steps:
 
       # Checkout the repository
