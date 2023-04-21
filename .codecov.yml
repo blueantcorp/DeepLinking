@@ -10,3 +10,4 @@ coverage:
 
 comment:
   layout: "reach,diff,flags,tree,betaprofiling"
+  show_critical_paths: true
