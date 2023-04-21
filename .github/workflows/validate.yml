@@ -49,11 +49,11 @@ jobs:
       - name: Test
         run: swift test --enable-code-coverage
 
-      - uses: actions/upload-artifact@v3.1.2
+      - uses: openbynature/swifty-code-coverage@v1.0.6
         with:
-          name: test-build-artifact
-          path: |
-            .build
+          build-path: .build
+          target: DeepLinkingPackageTests.xctest
+          is-spm: true
   
   danger:
     
