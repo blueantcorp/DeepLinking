@@ -27,7 +27,6 @@ jobs:
           swiftformat . \
             --swiftversion 5.8
 
-      # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3
         with:
           name: swiftlint
