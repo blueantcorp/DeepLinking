@@ -13,12 +13,25 @@ jobs:
 
   # Validate code 
   validate:
-    if: ${{ true }}
+    if: ${{ false }}
     uses: ./.github/workflows/validate.yml
+
+  swiftformat-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install SwiftFormat
+      uses: Cyberbeni/install-swift-tool@v2
+      with:
+        url: https://github.com/nicklockwood/SwiftFormat
+        version: '*' # https://devhints.io/semver
+    - name: Lint
+      run: swiftformat --lint .
 
   # Build and test
   build-test:
-    needs: validate
+    # needs: validate
     uses: ./.github/workflows/build-test.yml
 
   # Build product
