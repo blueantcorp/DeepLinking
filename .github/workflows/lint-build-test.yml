@@ -1,5 +1,9 @@
 name: Lint/Build/Test
-on: workflow_call
+on: 
+  workflow_call:
+  push:
+    branches:
+      - feature/*
 
 jobs:
   build:
