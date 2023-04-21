@@ -1,8 +1,6 @@
 name: Lint/Build/Test
 on: 
   workflow_call:
-environment:
-  name: development
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -41,6 +39,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: development
     steps:
 
       # Checkout the repository
