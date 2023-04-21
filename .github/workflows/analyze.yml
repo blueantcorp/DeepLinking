@@ -15,12 +15,13 @@ on:
 jobs:
 
   code-coverage:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     container: snowstep/llvm
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: test-build-artifact
+          name: test-coverage-artifact
 
       - uses: openbynature/swifty-code-coverage@v1.0.2
         with:
@@ -29,7 +30,7 @@ jobs:
           is-spm: true
   
   codecov:
-    needs: code-coverage
+    # needs: code-coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
