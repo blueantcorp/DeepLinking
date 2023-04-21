@@ -26,7 +26,7 @@ jobs:
             --enable-test-discovery \
             --enable-code-coverage
 
-      - uses: michaelhenry/swifty-code-coverage@v1.0.0
+      - uses: michaelhenry/swifty-code-coverage@v1.0.1
         with:
           build-path: .build
           target: .build/debug/DemoPackageTests.xctest
