@@ -14,20 +14,21 @@ on:
 
 jobs:
 
-  # Lint, build and test
+  # Validate product
   validate:
     uses: ./.github/workflows/validate.yml
 
-  release:
-    if: ${{ false }}
-    needs: validate
-    uses: ./.github/workflows/build-product.yml
-
-  # Analyze code
+  # Analyze product
   analyze:
     needs: validate
     uses: ./.github/workflows/analyze.yml
     secrets: inherit
+
+  # Build product
+  release:
+    if: ${{ false }}
+    needs: validate
+    uses: ./.github/workflows/build-product.yml
   
   # Generate documentation
   documentation:
