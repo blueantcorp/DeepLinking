@@ -5,6 +5,8 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    environment:
+      name: development
     steps:
 
       # Checkout the repository
