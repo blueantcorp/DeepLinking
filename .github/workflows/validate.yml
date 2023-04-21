@@ -38,7 +38,6 @@ jobs:
   build-test:
     # needs: lint-format
     runs-on: ubuntu-latest
-    container: snowstep/llvm
     steps:
 
       # Checkout the repository
@@ -46,21 +45,16 @@ jobs:
       - uses: mikehardy/buildcache-action@v2
 
       - name: Build
-        run: swift build 
+        run: swift build -v
   
       - name: Test
-        run: swift test --enable-code-coverage
-
-      - name: Test coverage
-        uses: maxep/spm-lcov-action@0.3.1
-        with:
-          output-file: ./coverage/lcov.info
+        run: swift test --enable-code-coverage && ls -l .build/debug/
 
       - uses: actions/upload-artifact@v3
         with:
-          name: test-coverage-artifact
+          name: test-build-artifact
           path: |
-            ./coverage/lcov.info
+            .build
   
   danger:
     
