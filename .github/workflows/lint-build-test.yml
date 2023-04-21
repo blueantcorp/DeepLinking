@@ -31,11 +31,13 @@ jobs:
 
       # Checkout the repository
       - uses: actions/checkout@v3
-      # - uses: mikehardy/buildcache-action@v2
+      - uses: mikehardy/buildcache-action@v2
 
       - name: Build Package
         run: |
-          swift build -v
+          set -o pipefail && \
+          swift build -v \
+          | xcpretty
   
   test:
     needs: build
@@ -44,12 +46,13 @@ jobs:
 
       # Checkout the repository
       - uses: actions/checkout@v3
-      # - uses: mikehardy/buildcache-action@v2
+      - uses: mikehardy/buildcache-action@v2
 
       - name: Test Package
         run: |
           set -o pipefail && \
           swift test \
+            --no-build \
             --enable-test-discovery \
             --enable-code-coverage \
             | xcpretty
