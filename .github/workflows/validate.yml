@@ -47,17 +47,13 @@ jobs:
         run: swift build 
   
       - name: Test
-        run: |
-          swift test \
-            --enable-test-discovery \
-            --enable-code-coverage \
-            --parallel
+        run: swift test --enable-code-coverage
 
       - uses: actions/upload-artifact@v3
         with:
           name: test-build-artifact
           path: |
-            ./.build/debug/DeepLinkKitPackageTests.xctest
+            ./.build/debug/DeepLinkingPackageTests.xctest
   
   danger:
     
