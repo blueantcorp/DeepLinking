@@ -6,7 +6,6 @@ gem 'danger'
 
 gem 'danger-swiftlint'
 gem 'danger-xcov'
-gem 'danger-oss'
 gem 'danger-prose'
 gem 'danger-mention'
 gem 'danger-changelog'
