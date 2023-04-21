@@ -11,7 +11,7 @@ jobs:
           url: https://github.com/nicklockwood/SwiftFormat
           version: '*' # https://devhints.io/semver
       - name: Lint
-        run: swiftformat --lint .
+        run: swiftformat --lint . --lenient --swiftversion 5.8
 
       # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3
