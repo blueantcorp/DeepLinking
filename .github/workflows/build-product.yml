@@ -1,6 +1,10 @@
 name: Build Product
-on:
+on: 
   workflow_call:
+  workflow_run:
+    workflows: ["Lint/Build/Test"]
+    types:
+      - completed
 
 jobs:
   archive:

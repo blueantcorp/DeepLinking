@@ -1,32 +1,20 @@
 name: Static Analysis
-on: workflow_call
+on: 
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        description: 'SonarCloud token'
+        required: true
 
 jobs:
-  slather:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-    
-    # Checkout the repository
-    - uses: actions/checkout@v3
-
-    # Install custom environment
-    - uses: ./.github/actions/bootstrap/
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    # Run Slather
-    - name: Install Slather
-      run: bundle exec slather
-      shell: bash
 
   danger:
-    needs: slather
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-    - uses: ./.github/actions/bootstrap/
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
 
     - name: Run Danger
       run: bundle exec danger
@@ -35,31 +23,11 @@ jobs:
         DANGER_GITHUB_API_TOKEN: ${{ github.token }}
         DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
 
-  codecov:
-    needs: slather
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-    - uses: actions/checkout@v3
-    - uses: sersoft-gmbh/swift-coverage-action@v3
-    - uses: mattpolzin/swift-codecov-action@0.7.5
-      with:
-        MINIMUM_COVERAGE: 90
-        INCLUDE_TESTS: "true"
-
-    # Upload coverage to Codecov
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-
   sonarcloud:
-    needs: slather
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
-    - name: SonarCloud Scan
-      run: echo ${{ secrets.SONAR_TOKEN }}
     - uses: SonarSource/sonarcloud-github-action@master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        GITHUB_TOKEN: ${{ github.token }}  
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
