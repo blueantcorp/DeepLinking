@@ -17,12 +17,12 @@ jobs:
 
   # Build product
   build-product:
-    needs: build-test
+    needs: lint-build-test
     uses: ./.github/workflows/build-product.yml
 
   # Analyze code
   analyze:
-    needs: build-test
+    needs: lint-build-test
     uses: ./.github/workflows/analyze.yml
     secrets: inherit
   
