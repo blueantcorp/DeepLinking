@@ -11,14 +11,9 @@ on: pull_request
   
 jobs:
 
-  # Validate code 
-  validate:
-    uses: ./.github/workflows/validate.yml
-
   # Build and test
-  build-test:
-    needs: validate
-    uses: ./.github/workflows/build-test.yml
+  lint-build-test:
+    uses: ./.github/workflows/lint-build-test.yml
 
   # Build product
   build-product:

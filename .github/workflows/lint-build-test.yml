@@ -2,13 +2,36 @@ name: Build/Test
 on: workflow_call
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+
+    # Checkout the repository
+    - uses: actions/checkout@v3
+    
+    # Run swiftlint
+    - uses: norio-nomura/action-swiftlint@3.2.1
+      with:
+        args: --reporter json > swiftlint.log
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    # Upload the swiftlint log as an artifact
+    - uses: actions/upload-artifact@v3
+      with:
+        name: swiftlint
+        path: |
+          ./.swiftlint.yml
+          ./swiftlint.log
+  
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Build Package
-      run: |
-        swift build -v
+      - uses: actions/checkout@v3
+      - name: Build Package
+        run: |
+          swift build -v
 
   test:
     needs: build
