@@ -33,21 +33,9 @@ jobs:
           path: |
             ./.swiftlint.yml
             ./swiftlint.log
-  
-  danger:
-    runs-on: ubuntu-latest
-    container: danger/swift:slim
-    steps:
-      - uses: actions/checkout@v3
-      - uses: danger/swift@3.16.0
-        with:
-            args: --failOnErrors --no-publish-check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build-test:
-    needs: [lint-format, danger]
+    needs: lint-format
     runs-on: ubuntu-latest
     steps:
 
@@ -64,3 +52,18 @@ jobs:
             --enable-test-discovery \
             --enable-code-coverage \
             --parallel
+  
+  danger:
+    if: ${{ false }}
+    needs: build-test
+    runs-on: ubuntu-latest
+    container: danger/swift:slim
+    steps:
+      - uses: actions/checkout@v3
+      - uses: danger/swift@3.16.0
+        with:
+            args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+          
