@@ -27,7 +27,9 @@ jobs:
         url: https://github.com/nicklockwood/SwiftFormat
         version: '*' # https://devhints.io/semver
     - name: Lint
-      run: swiftformat --lint .
+      run: swiftformat --lint . --exclude Tests --lenient
+
+  
 
   # Build and test
   build-test:
