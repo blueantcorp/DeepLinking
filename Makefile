@@ -19,9 +19,16 @@ test:
 	@rm -rf .build
 	
 codecov:
-	echo $(swift test --show-test-binary-path)
-	@xcrun llvm-cov export \
-		.build/arm64-apple-macosx/debug/codecov \
-		--format=lcov \
-		-instr-profile $(swift test --show-codecov-path | xargs dirname)/default.profdata \
-  		$(swift test --show-test-binary-path)
+	
+	@llvm-cov export \
+		.build/debug/DeepLinkingPackageTests.xctest/Contents/MacOS/DeepLinkingPackageTests \
+		-instr-profile .build/debug/codecov/default.profdata \
+		-format="lcov" > info.lcov
+
+	# Generate Profdata
+	# @xcrun llvm-cov show ./DeepLinking \
+	# 	-instr-profile=DeepLinking.profdata
+	
+	# Generate Report
+	# @xcrun llvm-cov export ./DeepLinking \
+	# 	-instr-profile=DeepLinking.profdata
