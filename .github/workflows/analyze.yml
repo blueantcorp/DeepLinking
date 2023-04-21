@@ -16,15 +16,14 @@ jobs:
 
   code-coverage:
     runs-on: ubuntu-latest
+    container: snowstep/llvm
     steps:
       - uses: actions/download-artifact@v3
         with:
           name: test-build-artifact
           path: .build
 
-      - run: ls -l
-
-      - uses: openbynature/swifty-code-coverage@v1.0.2
+      - uses: openbynature/swifty-code-coverage@v1.0.3
         with:
           build-path: .build
           target: DeepLinkingPackageTests.xctest
