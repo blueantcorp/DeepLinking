@@ -48,10 +48,10 @@ jobs:
         run: swift build 
   
       - name: Test
-        run: swift test --enable-code-coverage && ls -l .build/debug/
+        run: swift test --enable-code-coverage
 
       - name: Test coverage
-        uses: maxep/spm-lcov-action@0.3.0
+        uses: maxep/spm-lcov-action@0.3.1
         with:
             output-file: ./coverage/lcov.info
 
