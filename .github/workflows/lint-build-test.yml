@@ -1,6 +1,10 @@
 name: Lint/Build/Test
 on: 
   workflow_call:
+  workflow_run:
+    workflows: ["Lint/Build/Test"]
+    types:
+      - completed
 
 jobs:
   lint:
@@ -29,6 +33,10 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
+
+      # Checkout the repository
+      - uses: actions/checkout@v3
+
       - name: Build Package
         run: |
           swift build -v
@@ -37,6 +45,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+      # Checkout the repository
+      - uses: actions/checkout@v3
 
       - name: Test Package
         run: |
