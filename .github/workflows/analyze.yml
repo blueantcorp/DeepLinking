@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/restore-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: code-coverage-artifact
     - uses: SonarSource/sonarcloud-github-action@master
