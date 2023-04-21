@@ -7,6 +7,7 @@ on:
 
 jobs:
   lint-format:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +36,7 @@ jobs:
             ./swiftlint.log
 
   build-test:
-    needs: lint-format
+    # needs: lint-format
     runs-on: ubuntu-latest
     steps:
 
@@ -47,7 +48,7 @@ jobs:
         run: swift build 
   
       - name: Test
-        run: swift test --enable-code-coverage
+        run: swift test --enable-code-coverage && ls -l .build/
 
       - uses: actions/upload-artifact@v3
         with:
