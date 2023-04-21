@@ -31,8 +31,23 @@ jobs:
             ./.swiftlint.yml
             ./swiftlint.log
   
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Cyberbeni/install-swift-tool@v2
+        with:
+          url: https://github.com/danger/swift
+          version: '*'
+
+      - name: Danger
+        run: |
+          danger-swift ci \
+            --dangerfile ./Dangerfile.swift \
+            --pr
+
   build-test:
-    needs: lint-format
+    needs: [lint-format, danger]
     runs-on: ubuntu-latest
     steps:
 
