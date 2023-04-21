@@ -1,6 +1,13 @@
 name: Build/Test
 on:
   workflow_call:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - master
+      - develop
 
 jobs:
   build:
@@ -29,8 +36,9 @@ jobs:
           is-spm: true
       
       - name: Upload to Codecov
-        run: |
-          bash <(curl https://codecov.io/bash) -f "coverage/*.info"
-        shell: bash
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: fail
