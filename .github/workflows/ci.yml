@@ -16,16 +16,16 @@ jobs:
 
   # Lint, build and test
   lint-build-test:
-    if: ${{ false }}
     uses: ./.github/workflows/lint-build-test.yml
 
   build-product:
+    if: ${{ false }}
     needs: lint-build-test
     uses: ./.github/workflows/build-product.yml
 
   # Analyze code
   analyze:
-    # needs: lint-build-test
+    needs: lint-build-test
     uses: ./.github/workflows/analyze.yml
     secrets: inherit
   
