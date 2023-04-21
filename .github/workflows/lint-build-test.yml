@@ -1,6 +1,6 @@
 name: Lint/Build/Test
-on: 
-  workflow_call:
+on: workflow_call
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -9,9 +9,17 @@ jobs:
       - uses: Cyberbeni/install-swift-tool@v2
         with:
           url: https://github.com/nicklockwood/SwiftFormat
-          version: '*' # https://devhints.io/semver
+          version: '*'
+      
       - name: Lint
-        run: swiftformat --lint . --lenient --swiftversion 5.8
+        run: |
+          swiftformat --lint . \
+            --lenient \
+            --swiftversion 5.8 \
+            --reporter "emoji" > swiftlint.log || true
+
+      - name: Format
+        run: swiftformat . --swiftversion 5.8
 
       # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3
