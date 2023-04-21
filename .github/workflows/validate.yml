@@ -52,8 +52,14 @@ jobs:
             --enable-test-discovery \
             --enable-code-coverage \
             --parallel
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-build-artifact
+          path: ./.build
   
   danger:
+    
     if: ${{ false }}
     needs: build-test
     runs-on: ubuntu-latest
