@@ -23,7 +23,7 @@ jobs:
           name: test-build-artifact
           path: .build
 
-      - uses: openbynature/swifty-code-coverage@v1.0.3
+      - uses: openbynature/swifty-code-coverage@v1.0.4
         with:
           build-path: .build
           target: DeepLinkingPackageTests.xctest
