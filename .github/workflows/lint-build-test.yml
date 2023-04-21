@@ -5,16 +5,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-
-      # Checkout the repository
       - uses: actions/checkout@v3
-      
-      # Run swiftlint
-      - uses: norio-nomura/action-swiftlint@3.2.1
+      - uses: Cyberbeni/install-swift-tool@v2
         with:
-          args: --reporter json > swiftlint.log
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+          url: https://github.com/nicklockwood/SwiftFormat
+          version: '*' # https://devhints.io/semver
+      - name: Lint
+        run: swiftformat --lint .
 
       # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3

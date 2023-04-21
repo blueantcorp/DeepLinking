@@ -18,6 +18,7 @@ jobs:
     - uses: danger/swift@3.16.0
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   sonarcloud:
     runs-on: ubuntu-latest
