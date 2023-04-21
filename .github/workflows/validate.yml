@@ -38,21 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
+      - name: Danger
+        uses: danger/swift@3.16.0
         with:
-          url: https://github.com/danger/swift
-          version: '*'
-
-      - name: Danger JS
-        uses: danger/danger-js@9.1.6
+            args: --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Danger
-        run: |
-          danger-swift ci \
-            --dangerfile ./Dangerfile.swift \
-            --pr
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build-test:
     needs: [lint-format, danger]
