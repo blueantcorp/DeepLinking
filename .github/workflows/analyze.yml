@@ -2,6 +2,12 @@ name: Static Analysis
 on: 
   workflow_call:
     secrets:
+      GITHUB_TOKEN:
+        description: 'GitHub token'
+        required: true
+      DANGER_GITHUB_API_TOKEN:
+        description: 'GitHub API token'
+        required: true
       SONAR_TOKEN:
         description: 'SonarCloud token'
         required: true
@@ -18,10 +24,6 @@ jobs:
 
     - name: Run Danger
       run: bundle exec danger
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        DANGER_GITHUB_API_TOKEN: ${{ github.token }}
-        DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
 
   sonarcloud:
     runs-on: ubuntu-latest
