@@ -73,3 +73,10 @@ non_empty_lines(lines).each do |line|
     fail parse_line(line)
   end
 end
+
+xcov.report(
+   scheme: 'EasyPeasy',
+   workspace: 'Example/EasyPeasy.xcworkspace',
+   exclude_targets: 'Demo.app',
+   minimum_coverage_percentage: 90
+)
