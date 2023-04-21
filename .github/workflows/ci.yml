@@ -7,7 +7,7 @@
 #   BUNDLE_PATH: vendor/bundle
 
 name: CI
-on: [push]
+on: pull_request
   
 jobs:
 
