@@ -14,7 +14,7 @@ on:
 
 jobs:
 
-
+  # Lint, build and test
   lint-build-test:
     uses: ./.github/workflows/lint-build-test.yml
 
