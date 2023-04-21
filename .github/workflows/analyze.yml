@@ -23,6 +23,7 @@ jobs:
         DANGER_GITHUB_BEARER_TOKEN: ${{ github.token }}
 
   sonarcloud:
+    needs: danger
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
