@@ -56,7 +56,8 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: test-build-artifact
-          path: ./.build
+          path: |
+            ./.build/debug/DeepLinkKitPackageTests.xctest
   
   danger:
     
