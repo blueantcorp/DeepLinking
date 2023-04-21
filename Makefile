@@ -18,3 +18,10 @@ test:
 
 	@rm -rf .build
 	
+codecov:
+	echo $(swift test --show-test-binary-path)
+	@xcrun llvm-cov export \
+		.build/arm64-apple-macosx/debug/codecov \
+		--format=lcov \
+		-instr-profile $(swift test --show-codecov-path | xargs dirname)/default.profdata \
+  		$(swift test --show-test-binary-path)
