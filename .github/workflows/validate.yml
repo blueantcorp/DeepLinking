@@ -1,5 +1,9 @@
-name: validate
-on: workflow_call
+name: Validate product
+on: 
+  workflow_call:
+    secrets:
+      DANGER_GITHUB_API_TOKEN:
+        required: true
 
 jobs:
   lint-format:

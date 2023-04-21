@@ -17,6 +17,7 @@ jobs:
   # Validate product
   validate:
     uses: ./.github/workflows/validate.yml
+    secrets: inherit
 
   # Analyze product
   analyze:
