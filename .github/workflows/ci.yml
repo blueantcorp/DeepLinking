@@ -30,8 +30,11 @@ jobs:
   
   # Generate documentation
   documentation:
-    needs: analyze
-    uses: ./.github/workflows/documentation.yml
+    needs: [analyze]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Documentation
+      run: echo "Generating Documentation ..."
   
   #
   publish:
