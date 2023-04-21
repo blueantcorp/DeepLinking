@@ -1,0 +1,73 @@
+name: Validate product
+on: 
+  workflow_call:
+    secrets:
+      DANGER_GITHUB_API_TOKEN:
+        required: true
+
+jobs:
+  lint-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Cyberbeni/install-swift-tool@v2
+        with:
+          url: https://github.com/nicklockwood/SwiftFormat
+          version: '*'
+      
+      - name: Lint
+        run: |
+          swiftformat --lint . \
+            --lenient \
+            --swiftversion 5.8 \
+            --reporter "emoji" > swiftlint.log || true
+
+      - name: Format
+        run: | 
+          swiftformat . \
+            --swiftversion 5.8
+
+      # Upload the swiftlint log as an artifact
+      - uses: actions/upload-artifact@v3
+        with:
+          name: swiftlint
+          path: |
+            ./.swiftlint.yml
+            ./swiftlint.log
+  
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Cyberbeni/install-swift-tool@v2
+        with:
+          url: https://github.com/danger/swift
+          version: '*'
+
+      - name: Install DangerJS
+        run: npm install -g danger
+
+      - name: Danger
+        run: |
+          danger-swift ci \
+            --dangerfile ./Dangerfile.swift \
+            --pr
+
+  build-test:
+    needs: [lint-format, danger]
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout the repository
+      - uses: actions/checkout@v3
+      - uses: mikehardy/buildcache-action@v2
+
+      - name: Build
+        run: swift build 
+  
+      - name: Test
+        run: |
+          swift test \
+            --enable-test-discovery \
+            --enable-code-coverage \
+            --parallel
