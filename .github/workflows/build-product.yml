@@ -1,9 +1,5 @@
 name: Build Product
-on:
-  workflow_call:
-  pull_request:
-    branches:
-      - master
+on: workflow_call
 
 jobs:
   archive:
