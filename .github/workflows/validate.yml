@@ -48,7 +48,7 @@ jobs:
         run: swift build 
   
       - name: Test
-        run: swift test --enable-code-coverage && ls -l .build/
+        run: swift test --enable-code-coverage && ls -l .build/debug/
 
       - uses: actions/upload-artifact@v3
         with:
