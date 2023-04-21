@@ -16,7 +16,7 @@ jobs:
 
   code-coverage:
     runs-on: ubuntu-latest
-    container: snowstep/llvm-swift
+    container: snowstep/llvm
     steps:
       - uses: actions/download-artifact@v3
         with:
