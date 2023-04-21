@@ -14,7 +14,17 @@ on:
 
 jobs:
 
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: danger/swift@3.16.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+
   code-coverage:
+    needs: danger
     runs-on: ubuntu-latest
     steps:
       - uses: openbynature/swifty-code-coverage@v1.0.2
@@ -22,15 +32,6 @@ jobs:
           build-path: .build
           target: DeepLinkingPackageTests.xctest
           is-spm: true
-
-  danger:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: danger/swift@3.16.0
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
   
   codecov:
     needs: code-coverage
