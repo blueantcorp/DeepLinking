@@ -59,7 +59,7 @@ jobs:
         with:
           name: test-coverage-artifact
           path: |
-          ./coverage/lcov.info
+            ./coverage/lcov.info
   
   danger:
     
