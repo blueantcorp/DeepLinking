@@ -14,14 +14,32 @@ jobs:
   preflight:
     runs-on: ubuntu-latest
     container:
-      image: homebrew/brew:latest
-      options: --user root
+      image: homebrew/brew@v4.0.14
+      options: --linuxbrew root
     steps:
 
       # Brew setup
-      - run: | 
-          brew upgrade
+      - run: |
+          sudo chown -R linuxbrew:linuxbrew /home/linuxbrew
+          sudo chmod -R 777 /home/linuxbrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Formula
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Commands
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Services
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Source
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Utils
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Developer
+
           brew update
+          brew doctor
+          brew upgrade
           brew bundle 
             # check \
             # --verbose \
