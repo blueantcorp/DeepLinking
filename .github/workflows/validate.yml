@@ -24,8 +24,7 @@ jobs:
             check \
             --verbose \
             --no-upgrade \
-            --file ./Brewfile \
-            --color
+            --file ./Brewfile
 
       # Save brew in cache
       - uses: actions/cache/save@v3
