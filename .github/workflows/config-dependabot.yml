@@ -11,7 +11,7 @@ jobs:
         run: |
           ./.github/scripts/update-dependabot.ps1 \
             -targetBranch component-updates \
-            -outputFile ../dependabot.yml
+            -outputFile .github/dependabot.yml
 
       - name: Push files to repo
         shell: pwsh
