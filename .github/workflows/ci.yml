@@ -14,24 +14,26 @@ on:
 
 jobs:
 
-  # Lint, build and test
-  lint-build-test:
-    if: ${{ false }}
-    uses: ./.github/workflows/lint-build-test.yml
+  # Validate product
+  validate:
+    uses: ./.github/workflows/validate.yml
+    secrets: inherit
 
-  build-product:
-    needs: lint-build-test
-    uses: ./.github/workflows/build-product.yml
-
-  # Analyze code
+  # Analyze product
   analyze:
-    # needs: lint-build-test
+    needs: validate
     uses: ./.github/workflows/analyze.yml
     secrets: inherit
+
+  # Build product
+  release:
+    if: ${{ false }}
+    needs: validate
+    uses: ./.github/workflows/build-product.yml
   
   # Generate documentation
   documentation:
-    needs: [analyze]
+    needs: analyze
     runs-on: ubuntu-latest
     steps:
     - name: Documentation
@@ -39,7 +41,7 @@ jobs:
   
   #
   publish:
-    needs: [documentation, build-product]
+    needs: [documentation, release]
     runs-on: ubuntu-latest
     steps:
     - name: Publish

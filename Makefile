@@ -18,3 +18,17 @@ test:
 
 	@rm -rf .build
 	
+codecov:
+	
+	@llvm-cov export \
+		.build/debug/DeepLinkingPackageTests.xctest/Contents/MacOS/DeepLinkingPackageTests \
+		-instr-profile .build/debug/codecov/default.profdata \
+		-format="lcov" > info.lcov
+
+	# Generate Profdata
+	# @xcrun llvm-cov show ./DeepLinking \
+	# 	-instr-profile=DeepLinking.profdata
+	
+	# Generate Report
+	# @xcrun llvm-cov export ./DeepLinking \
+	# 	-instr-profile=DeepLinking.profdata

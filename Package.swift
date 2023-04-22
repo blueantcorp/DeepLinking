@@ -7,19 +7,10 @@ let package = Package(
         .iOS(.v13),
     ],
     products: [
-        .library(
-            name: "DeepLinking",
-            targets: ["DeepLinking"]
-        ),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/yonaskolb/XcodeGen.git", from: "2.34.0"),
+        .library(name: "DeepLinking", targets: ["DeepLinking"]),
     ],
     targets: [
         .target(name: "DeepLinking", dependencies: []),
-        .testTarget(
-            name: "DeepLinkingTests",
-            dependencies: ["DeepLinking"]
-        ),
+        .testTarget(name: "DeepLinkingTests", dependencies: ["DeepLinking"]),
     ]
 )

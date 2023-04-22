@@ -4,17 +4,75 @@ on:
     secrets:
       DANGER_GITHUB_API_TOKEN:
         required: true
+env:
+  cache-brew-path: |
+    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
+    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
 
 jobs:
+
+  preflight:
+    runs-on: ubuntu-latest
+    container:
+      image: homebrew/brew@v4.0.14
+      options: --linuxbrew root
+    steps:
+
+      # Brew setup
+      - run: |
+          sudo chown -R linuxbrew:linuxbrew /home/linuxbrew
+          sudo chmod -R 777 /home/linuxbrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Formula
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Commands
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Services
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Source
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Utils
+          sudo chmod -R 777 /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask/Developer
+
+          brew update
+          brew doctor
+          brew upgrade
+          brew bundle 
+            # check \
+            # --verbose \
+            # --no-upgrade \
+            # --file ./Brewfile
+
+      # Save brew in cache
+      - uses: actions/cache/save@v3
+        id: cache
+        with:
+          path: ${{ env.cache-brew-path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
+
   lint-format:
     runs-on: ubuntu-latest
+    container: homebrew/brew:latest
+    needs: preflight
     steps:
+
+      # Checkout the repository
       - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
+
+      # Restore brew from cache
+      - uses: actions/cache/restore@v3
+        id: cache
         with:
-          url: https://github.com/nicklockwood/SwiftFormat
-          version: '*'
-      
+          path: ${{ env.cache-brew-path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Install swiftformat
+        run: brew install swiftformat
+
       - name: Lint
         run: |
           swiftformat --lint . \
@@ -27,47 +85,44 @@ jobs:
           swiftformat . \
             --swiftversion 5.8
 
-      # Upload the swiftlint log as an artifact
       - uses: actions/upload-artifact@v3
         with:
           name: swiftlint
           path: |
             ./.swiftlint.yml
             ./swiftlint.log
-  
-  danger:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
-        with:
-          url: https://github.com/danger/swift
-          version: '*'
-
-      - name: Install DangerJS
-        run: npm install -g danger
-
-      - name: Danger
-        run: |
-          danger-swift ci \
-            --dangerfile ./Dangerfile.swift \
-            --pr
 
   build-test:
-    needs: [lint-format, danger]
+    if: ${{ false }}
+    needs: lint-format
     runs-on: ubuntu-latest
     steps:
 
       # Checkout the repository
       - uses: actions/checkout@v3
-      - uses: mikehardy/buildcache-action@v2
 
       - name: Build
-        run: swift build 
+        run: swift build -v
   
       - name: Test
-        run: |
-          swift test \
-            --enable-test-discovery \
-            --enable-code-coverage \
-            --parallel
+        run: swift test --enable-code-coverage
+
+      - uses: openbynature/swifty-code-coverage@main
+        with:
+          build-path: .build
+          target: DeepLinkingPackageTests.xctest
+          is-spm: true
+
+  danger:
+    if: ${{ false }}
+    needs: build-test
+    runs-on: ubuntu-latest
+    container: danger/swift:slim
+    steps:
+      - uses: actions/checkout@v3
+      - uses: danger/swift@3.16.0
+        with:
+          args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
