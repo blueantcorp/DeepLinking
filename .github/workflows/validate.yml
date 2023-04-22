@@ -20,6 +20,8 @@ jobs:
 
       # Brew setup
       - run: | 
+          brew upgrade
+          brew update
           brew bundle 
             # check \
             # --verbose \
