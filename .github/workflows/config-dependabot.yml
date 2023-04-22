@@ -1,7 +1,5 @@
 name: Update Dependabot config
 on: push
-env:
-
 jobs:
   UpdateDependabot:
     runs-on: ubuntu-latest
@@ -12,7 +10,6 @@ jobs:
       - name: Update Dependabot
         shell: pwsh
         run: |
-          ls -lR
           ./.github/scripts/update-dependabot.ps1 \
             -targetBranch component-updates \
             -outputFile ../dependabot.yml
