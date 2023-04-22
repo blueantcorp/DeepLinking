@@ -5,7 +5,7 @@ on:
       DANGER_GITHUB_API_TOKEN:
         required: true
 env:
-  cache-homebrew-path: |
+  cache-brew-path: |
     /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
     /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
 
@@ -13,18 +13,24 @@ jobs:
 
   preflight:
     runs-on: ubuntu-latest
-    container: homebrew/brew:latest
+    container:
+      image: homebrew/brew:latest
+      options: --user root
     steps:
 
       # Brew setup
       - run: | 
-          brew bundle check --verbose --no-upgrade
+          brew bundle \
+            --verbose \
+            --no-upgrade \
+            --file ./Brewfile \
+            --color
 
       # Save brew in cache
       - uses: actions/cache/save@v3
-        id: brew-cache
+        id: cache
         with:
-          path: ${{ env.cache-homebrew-path }}
+          path: ${{ env.cache-brew-path }}
           key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
 
   lint-format:
@@ -38,13 +44,13 @@ jobs:
 
       # Restore brew from cache
       - uses: actions/cache/restore@v3
-        id: brew-cache
+        id: cache
         with:
-          path: ${{ env.cache-homebrew-path }}
+          path: ${{ env.cache-brew-path }}
           key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
 
-      - name: Install swiftformat
-        if: steps.brew-cache.outputs.cache-hit != 'true'
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Install swiftformat
         run: brew install swiftformat
 
       - name: Lint
