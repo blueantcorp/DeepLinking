@@ -9,7 +9,7 @@ jobs:
       - name: Update Dependabot
         shell: pwsh
         run: |
-          ./.github/scripts/update-dependabot.ps1 -targetBranch component-updates -outputFile ./.github/dependabot.yml
+          ./.github/scripts/update-dependabot.ps1 -targetBranch component-updates -outputFile .github/dependabot.yml
 
       - name: Push files to repo
         shell: pwsh
