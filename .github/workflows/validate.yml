@@ -20,11 +20,11 @@ jobs:
 
       # Brew setup
       - run: | 
-          brew bundle \
-            check \
-            --verbose \
-            --no-upgrade \
-            --file ./Brewfile
+          brew bundle 
+            # check \
+            # --verbose \
+            # --no-upgrade \
+            # --file ./Brewfile
 
       # Save brew in cache
       - uses: actions/cache/save@v3
