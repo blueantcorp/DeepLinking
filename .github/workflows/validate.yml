@@ -21,6 +21,7 @@ jobs:
       # Brew setup
       - run: | 
           brew bundle \
+            check \
             --verbose \
             --no-upgrade \
             --file ./Brewfile \
