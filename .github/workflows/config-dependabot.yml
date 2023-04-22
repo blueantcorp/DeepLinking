@@ -10,6 +10,7 @@ jobs:
       - name: Update Dependabot
         shell: pwsh
         run: |
+          ls -l
           ./../scripts/update-dependabot.ps1 \
             -targetBranch component-updates \
             -outputFile ../dependabot.yml
