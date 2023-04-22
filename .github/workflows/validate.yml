@@ -4,17 +4,48 @@ on:
     secrets:
       DANGER_GITHUB_API_TOKEN:
         required: true
+env:
+  cache-homebrew-path: |
+    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
+    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
 
 jobs:
-  lint-format:
-    if: ${{ false }}
+
+  preflight:
     runs-on: ubuntu-latest
+    container: homebrew/brew:latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
+
+      # Brew setup
+      - run: | 
+          brew bundle check --verbose --no-upgrade
+
+      # Save brew in cache
+      - uses: actions/cache/save@v3
+        id: brew-cache
         with:
-          url: https://github.com/nicklockwood/SwiftFormat
-          version: '*'
+          path: ${{ env.cache-homebrew-path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
+
+  lint-format:
+    runs-on: ubuntu-latest
+    container: homebrew/brew:latest
+    needs: preflight
+    steps:
+
+      # Checkout the repository
+      - uses: actions/checkout@v3
+
+      # Restore brew from cache
+      - uses: actions/cache/restore@v3
+        id: brew-cache
+        with:
+          path: ${{ env.cache-homebrew-path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('**/Brewfile') }}
+
+      - name: Install swiftformat
+        if: steps.brew-cache.outputs.cache-hit != 'true'
+        run: brew install swiftformat
 
       - name: Lint
         run: |
@@ -36,7 +67,8 @@ jobs:
             ./swiftlint.log
 
   build-test:
-    # needs: lint-format
+    if: ${{ false }}
+    needs: lint-format
     runs-on: ubuntu-latest
     steps:
 
@@ -54,9 +86,8 @@ jobs:
           build-path: .build
           target: DeepLinkingPackageTests.xctest
           is-spm: true
-  
+
   danger:
-    
     if: ${{ false }}
     needs: build-test
     runs-on: ubuntu-latest
