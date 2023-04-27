@@ -13,7 +13,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/yonaskolb/XcodeGen.git", from: "2.34.0"),
+        .package(url: "https://github.com/yonaskolb/XcodeGen.git", from: "2.35.0"),
     ],
     targets: [
         .target(name: "DeepLinking", dependencies: []),
