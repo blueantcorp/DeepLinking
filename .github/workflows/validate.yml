@@ -4,10 +4,10 @@ on:
     secrets:
       DANGER_GITHUB_API_TOKEN:
         required: true
-env:
-  cache-brew-path: |
-    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
-    /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
+# env:
+#   cache-brew-path: |
+#     /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core
+#     /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-cask
 
 jobs:
 
