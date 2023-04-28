@@ -19,6 +19,8 @@ jobs:
       # Brew setup
       - run: |
 
+          ls -l
+
           brew update
           brew doctor
           brew upgrade
