@@ -19,7 +19,7 @@ jobs:
       # Brew setup
       - run: |
 
-          ls -l
+          which .linuxbrew
 
           brew update
           brew doctor
