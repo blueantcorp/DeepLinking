@@ -13,7 +13,7 @@ jobs:
 
   preflight:
     runs-on: ubuntu-latest
-    # container: homebrew/brew
+    container: linuxbrew/linuxbrew
     steps:
 
       # Brew setup
