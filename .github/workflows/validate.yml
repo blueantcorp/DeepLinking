@@ -18,13 +18,10 @@ jobs:
 
       # Brew setup
       - run: |
-
-          echo which .linuxbrew
-
-          brew update
-          brew doctor
-          brew upgrade
-          brew bundle 
+          .linuxbrew update
+          .linuxbrew doctor
+          .linuxbrew upgrade
+          .linuxbrew bundle 
             # check \
             # --verbose \
             # --no-upgrade \
