@@ -1,5 +1,8 @@
 name: Update Dependabot config
 on: push
+permissions:
+  contents: write
+
 jobs:
   UpdateDependabot:
     runs-on: ubuntu-latest
