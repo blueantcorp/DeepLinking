@@ -1,5 +1,5 @@
 name: Update Dependabot config
-on: push
+on: workflow_dispatch
 permissions:
   contents: write
 
