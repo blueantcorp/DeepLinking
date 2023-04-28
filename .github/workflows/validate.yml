@@ -19,7 +19,7 @@ jobs:
       # Brew setup
       - run: |
 
-          which .linuxbrew
+          echo which .linuxbrew
 
           brew update
           brew doctor
