@@ -120,7 +120,7 @@ jobs:
     container: danger/swift:slim
     steps:
       - uses: actions/checkout@v3
-      - uses: danger/swift@3.16.0
+      - uses: danger/swift@3
         with:
           args: --failOnErrors --no-publish-check
         env:
