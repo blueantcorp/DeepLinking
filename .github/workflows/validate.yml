@@ -9,7 +9,7 @@ jobs:
   lint-format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: Cyberbeni/install-swift-tool@v2
         with:
           url: https://github.com/nicklockwood/SwiftFormat
@@ -38,7 +38,7 @@ jobs:
   danger:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: Cyberbeni/install-swift-tool@v2
         with:
           url: https://github.com/danger/swift
@@ -59,7 +59,7 @@ jobs:
     steps:
 
       # Checkout the repository
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: mikehardy/buildcache-action@v2
 
       - name: Build
