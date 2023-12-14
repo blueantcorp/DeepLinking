@@ -15,7 +15,7 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
   
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: swiftlint
         path: |
