@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
+      - uses: Cyberbeni/install-swift-tool@v3.1.11
         with:
           url: https://github.com/nicklockwood/SwiftFormat
           version: '*'
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Cyberbeni/install-swift-tool@v2
+      - uses: Cyberbeni/install-swift-tool@v3.1.11
         with:
           url: https://github.com/danger/swift
           version: '*'
